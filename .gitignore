@@ -1,0 +1,19 @@
+# Backend
+/skill-sharing-api/HELP.md
+/skill-sharing-api/target/
+/skill-sharing-api/.mvn/
+/skill-sharing-api/mvnw
+/skill-sharing-api/mvnw.cmd
+/skill-sharing-api/.idea/
+/skill-sharing-api/*.iml
+
+# Frontend
+/skill-sharing-client/node_modules/
+/skill-sharing-client/build/
+/skill-sharing-client/.env
+/skill-sharing-client/.env.local
+/skill-sharing-client/.DS_Store
+
+# General
+.DS_Store
+*.log
