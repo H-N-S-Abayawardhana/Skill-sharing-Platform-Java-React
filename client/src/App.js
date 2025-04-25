@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route,Routes} from "react-router";
-import Home from './Pages/Home';
-import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
+import Home from './pages/Home';
+import AddLearningPlan from './pages/LearningPlan/AddLearningPlan';
 
 
 
 
-import Home from "./pages/Home";
+//import Home from "./pages/Home";
 
 
 function App() {
