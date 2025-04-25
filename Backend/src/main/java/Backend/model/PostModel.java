@@ -24,7 +24,12 @@ public class PostModel {
 
     @ElementCollection
     private List<Long> likes = new ArrayList<>();
-
+    
+    // New field for storing media URLs (images/videos)
+    @ElementCollection
+    @Column(length = 1000)
+    private List<String> mediaUrls = new ArrayList<>();
+    
     @Column(nullable = false)
     private Long userId;
 
@@ -47,11 +52,12 @@ public class PostModel {
     }
 
     // Full parameterized constructor
-    public PostModel(String title, String content, List<String> tags, List<Long> likes, Long userId) {
+    public PostModel(String title, String content, List<String> tags, List<Long> likes, List<String> mediaUrls, Long userId) {
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.likes = likes;
+        this.mediaUrls = mediaUrls;
         this.userId = userId;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
@@ -96,6 +102,14 @@ public class PostModel {
 
     public void setLikes(List<Long> likes) {
         this.likes = likes;
+    }
+    
+    public List<String> getMediaUrls() {
+        return mediaUrls;
+    }
+    
+    public void setMediaUrls(List<String> mediaUrls) {
+        this.mediaUrls = mediaUrls;
     }
 
     public Long getUserId() {

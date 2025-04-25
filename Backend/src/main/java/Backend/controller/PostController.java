@@ -1,3 +1,4 @@
+// Backend/controller/PostController.java
 package Backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class PostController {
     // CREATE - Add a new post
     @PostMapping("/posts")
     public PostModel createPost(@RequestBody PostModel newPost) {
+        // Validate media URLs (max 3)
+        if (newPost.getMediaUrls() != null && newPost.getMediaUrls().size() > 3) {
+            throw new IllegalArgumentException("Maximum 3 media files allowed per post");
+        }
+        
         return postRepository.save(newPost);
     }
 
@@ -39,11 +45,17 @@ public class PostController {
     // UPDATE - Update a post
     @PutMapping("/posts/{id}")
     public PostModel updatePost(@RequestBody PostModel updatedPost, @PathVariable Long id) {
+        // Validate media URLs (max 3)
+        if (updatedPost.getMediaUrls() != null && updatedPost.getMediaUrls().size() > 3) {
+            throw new IllegalArgumentException("Maximum 3 media files allowed per post");
+        }
+        
         return postRepository.findById(id)
                 .map(post -> {
                     post.setTitle(updatedPost.getTitle());
                     post.setContent(updatedPost.getContent());
                     post.setTags(updatedPost.getTags());
+                    post.setMediaUrls(updatedPost.getMediaUrls());
                     return postRepository.save(post);
                 })
                 .orElseThrow(() -> new PostNotFoundException(id));
