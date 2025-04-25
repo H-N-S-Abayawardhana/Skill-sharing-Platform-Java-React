@@ -1,13 +1,13 @@
-package com.pafwebapp.skill_sharing_api;
+package Backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SkillSharingApiApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SkillSharingApiApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }
