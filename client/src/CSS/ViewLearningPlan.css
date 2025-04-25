@@ -1,0 +1,360 @@
+/* ViewLearningPlan.css - External CSS for the ViewLearningPlan Component */
+
+/* Main Container */
+.view-learning-plan-container {
+    background-color: #F5F5F5;
+    padding: 2rem;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    color: #212121;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Loading State */
+  .view-learning-plan-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #F5F5F5;
+    color: #3F51B5;
+  }
+  
+  .view-learning-plan-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(63, 81, 181, 0.2);
+    border-top: 5px solid #3F51B5;
+    border-radius: 50%;
+    animation: view-learning-plan-spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+  
+  @keyframes view-learning-plan-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Error State */
+  .view-learning-plan-error-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 3rem;
+    text-align: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    width: 100%;
+    margin: 2rem auto;
+  }
+  
+  .view-learning-plan-error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Main Card */
+  .view-learning-plan-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 800px;
+    overflow: hidden;
+  }
+  
+  /* Card Header */
+  .view-learning-plan-header {
+    background-color: #3F51B5;
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .view-learning-plan-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  
+  /* Card Content */
+  .view-learning-plan-content {
+    padding: 2rem;
+  }
+  
+  .view-learning-plan-section {
+    margin-bottom: 2rem;
+  }
+  
+  .view-learning-plan-section-title {
+    color: #3F51B5;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  
+  .view-learning-plan-section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 40px;
+    background-color: #00BCD4;
+  }
+  
+  .view-learning-plan-description {
+    line-height: 1.6;
+    margin-top: 0;
+  }
+  
+  /* Two Column Layout */
+  .view-learning-plan-two-columns {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .view-learning-plan-column {
+    flex: 1;
+  }
+  
+  /* Timeline */
+  .view-learning-plan-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .view-learning-plan-date-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .view-learning-plan-date-label {
+    font-size: 0.9rem;
+    color: #757575;
+    margin-bottom: 0.25rem;
+  }
+  
+  .view-learning-plan-date-value {
+    font-weight: 500;
+  }
+  
+  /* Progress Bar */
+  .view-learning-plan-progress-container {
+    margin-top: 0.5rem;
+  }
+  
+  .view-learning-plan-progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    align-items: center;
+  }
+  
+  .view-learning-plan-progress-label {
+    font-size: 0.9rem;
+    color: #757575;
+  }
+  
+  .view-learning-plan-progress-percentage {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3F51B5;
+  }
+  
+  .view-learning-plan-progress-bar {
+    height: 10px;
+    background-color: #E0E0E0;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .view-learning-plan-progress-fill {
+    height: 100%;
+    background-color: #CDDC39;
+    border-radius: 5px;
+  }
+  
+  /* Topics */
+  .view-learning-plan-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+  
+  .view-learning-plan-topic-tag {
+    background-color: #E8EAF6;
+    color: #3F51B5;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* Resources */
+  .view-learning-plan-resources-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  
+  .view-learning-plan-resource-item {
+    padding: 0.8rem 1rem;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    word-break: break-all;
+  }
+  
+  .view-learning-plan-resource-link {
+    color: #3F51B5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .view-learning-plan-resource-link:hover {
+    color: #00BCD4;
+    text-decoration: underline;
+  }
+  
+  /* Metadata */
+  .view-learning-plan-metadata {
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+    border-top: 1px solid #EEEEEE;
+    font-size: 0.9rem;
+    color: #757575;
+  }
+  
+  .view-learning-plan-timestamp {
+    margin-bottom: 0.5rem;
+  }
+  
+  .view-learning-plan-timestamp-label {
+    font-weight: 500;
+    margin-right: 0.3rem;
+  }
+  
+  /* Footer */
+  .view-learning-plan-footer {
+    border-top: 1px solid #EEEEEE;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Buttons */
+  .view-learning-plan-btn {
+    padding: 0.7rem 1.4rem;
+    border-radius: 4px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  
+  .view-learning-plan-btn-primary {
+    background-color: #3F51B5;
+    color: white;
+  }
+  
+  .view-learning-plan-btn-primary:hover {
+    background-color: #303F9F;
+    box-shadow: 0 2px 8px rgba(63, 81, 181, 0.3);
+  }
+  
+  .view-learning-plan-btn-accent {
+    background-color: #00BCD4;
+    color: white;
+  }
+  
+  .view-learning-plan-btn-accent:hover {
+    background-color: #00ACC1;
+    box-shadow: 0 2px 8px rgba(0, 188, 212, 0.3);
+  }
+  
+  .view-learning-plan-btn-outline {
+    background-color: transparent;
+    color: #3F51B5;
+    border: 1px solid #3F51B5;
+  }
+  
+  .view-learning-plan-btn-outline:hover {
+    background-color: #E8EAF6;
+  }
+  
+  /* Status Badges */
+  .view-learning-plan-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  
+  .view-learning-plan-badge-primary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .view-learning-plan-badge-secondary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .view-learning-plan-badge-success {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  .view-learning-plan-badge-light {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .view-learning-plan-container {
+      padding: 1rem;
+    }
+    
+    .view-learning-plan-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    
+    .view-learning-plan-two-columns {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .view-learning-plan-badge {
+      align-self: flex-start;
+    }
+    
+    .view-learning-plan-footer {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .view-learning-plan-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
