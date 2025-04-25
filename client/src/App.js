@@ -4,6 +4,11 @@ import Home from './Pages/Home';
 import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
 
 
+
+
+import Home from "./pages/Home";
+
+
 function App() {
   return (
     <div>
