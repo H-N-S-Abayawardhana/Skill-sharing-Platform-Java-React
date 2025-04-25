@@ -1,10 +1,10 @@
-package com.pafwebapp.skill_sharing_api;
+package Backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SkillSharingApiApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {
