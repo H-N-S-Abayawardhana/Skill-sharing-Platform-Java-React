@@ -18,7 +18,6 @@ function App() {
       <React.Fragment>
         <Routes>
           <Route path="/" element={<Login />} />
-import Login from './Pages/Login';
           <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
           <Route path="/Profile" element={<Profile/>} />
