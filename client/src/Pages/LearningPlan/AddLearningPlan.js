@@ -3,6 +3,7 @@ import React, { useState,userEffect } from 'react';
 import '../../css/AddLearningPlan.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import NavBar from '../../components/NavBar';
 
 export default function AddLearningPlan() {
   const navigate = useNavigate();
@@ -72,6 +73,8 @@ export default function AddLearningPlan() {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="container py-4">
       <div className="row">
         <div className="col-md-8 offset-md-2">
@@ -218,5 +221,6 @@ export default function AddLearningPlan() {
         </div>
       </div>
     </div>
+    </>
   );
 }
