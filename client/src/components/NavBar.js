@@ -58,8 +58,8 @@ const NavBar = () => {
                 Posts
               </a>
               <ul className="dropdown-menu" aria-labelledby="postsDropdown">
-                <li><a className="dropdown-item" href="/posts/add">Add Posts</a></li>
-                <li><a className="dropdown-item" href="/posts/view">View Posts</a></li>
+                <li><a className="dropdown-item" href="/add-post">Add Posts</a></li>
+                <li><a className="dropdown-item" href="/posts">View Posts</a></li>
               </ul>
             </li>
           </ul>
