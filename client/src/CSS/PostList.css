@@ -1,0 +1,174 @@
+/* Background and layout */
+.postlist-container {
+    background: linear-gradient(to bottom right, #f0f2f5, #ffffff);
+    padding: 3rem 1.5rem;
+    min-height: 100vh;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.postlist-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.postlist-title {
+    color: #3F51B5;
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+.postlist-add-btn {
+    background-color: #3F51B5;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+}
+
+.postlist-add-btn:hover {
+    background-color: #303F9F;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(63, 81, 181, 0.25);
+}
+
+/* Grid layout */
+.postlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+/* Each card wrapper */
+.postlist-grid-item {
+    display: flex;
+}
+
+/* Cards */
+.postlist-card {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+}
+
+.postlist-card:hover {
+    box-shadow: 0 10px 30px rgba(63, 81, 181, 0.2);
+    transform: translateY(-4px);
+}
+
+.postlist-card-body {
+    padding: 1.25rem 1.5rem;
+    flex: 1;
+}
+
+.postlist-card-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1a237e;
+    margin-bottom: 0.75rem;
+}
+
+.postlist-card-text {
+    color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Card footer */
+.postlist-card-footer {
+    background-color: #fafafa;
+    padding: 0.9rem 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.postlist-likes {
+    color: #00ACC1;
+    font-weight: bold;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+/* Action buttons (includes button and Link) */
+.postlist-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.postlist-actions .postlist-btn-view,
+.postlist-actions .postlist-btn-edit,
+.postlist-actions .postlist-btn-delete {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: #fff;
+}
+
+/* View button - Cyan */
+.postlist-btn-view {
+    background-color: #00BCD4;
+    box-shadow: 0 4px 12px rgba(0, 188, 212, 0.3);
+}
+.postlist-btn-view:hover {
+    background-color: #0097A7;
+    box-shadow: 0 6px 18px rgba(0, 151, 167, 0.4);
+    color: #fff;
+}
+
+/* Edit button - Lime Green */
+.postlist-btn-edit {
+    background-color: #CDDC39;
+    color: #212121 !important;
+    box-shadow: 0 4px 12px rgba(205, 220, 57, 0.3);
+}
+.postlist-btn-edit:hover {
+    background-color: #AFB42B;
+    box-shadow: 0 6px 18px rgba(175, 180, 43, 0.4);
+    color: #212121 !important;
+}
+
+/* Delete button - Red (used on <button>) */
+.postlist-btn-delete {
+    background-color: #f44336;
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+.postlist-btn-delete:hover {
+    background-color: #d32f2f;
+    box-shadow: 0 6px 18px rgba(211, 47, 47, 0.4);
+    color: #fff;
+}
+
+/* Empty state */
+.postlist-empty {
+    background-color: #E3F2FD;
+    color: #2c3e50;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+    box-shadow: 0 2px 10px rgba(33, 150, 243, 0.1);
+}

@@ -1,0 +1,91 @@
+.editpost-container {
+    background: linear-gradient(to bottom right, #eef2f3, #ffffff);
+    min-height: 100vh;
+    padding: 3rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.editpost-wrapper {
+    max-width: 650px;
+    margin: auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.editpost-wrapper:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.editpost-title {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.editpost-form .form-label {
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.editpost-form .form-control {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fafafa;
+}
+
+.editpost-form .form-control:focus {
+    border-color: #5c6bc0;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.2);
+    background-color: #fff;
+}
+
+.editpost-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.editpost-btn-submit,
+.editpost-btn-cancel {
+    padding: 0.6rem 1.4rem;
+    font-weight: 500;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.editpost-btn-submit {
+    background-color: #5c6bc0;
+    color: #fff;
+}
+
+.editpost-btn-submit:hover {
+    background-color: #3f51b5;
+}
+
+.editpost-btn-cancel {
+    background-color: #f44336;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.editpost-btn-cancel:hover {
+    background-color: #d32f2f;
+}

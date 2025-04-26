@@ -1,0 +1,138 @@
+/* Page container */
+.viewpost-container {
+    background: linear-gradient(to bottom right, #f0f2f5, #ffffff);
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+}
+
+/* Card wrapper */
+.viewpost-wrapper {
+    max-width: 850px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+/* Post title */
+.viewpost-title {
+    text-align: center;
+    color: #3F51B5;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+/* Media */
+.viewpost-media {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.viewpost-media img.media-item,
+.viewpost-media video.media-item {
+    width: 100%;
+    max-width: 350px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Content area */
+.viewpost-content {
+    background-color: #F1F1F1;
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 2rem;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Tags */
+.viewpost-tags {
+    margin-bottom: 2rem;
+}
+
+.viewpost-tags h5 {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 0.75rem;
+}
+
+.viewpost-tags .badge {
+    background-color: #6c757d;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.4rem;
+    padding: 0.45em 0.9em;
+    border-radius: 10px;
+    display: inline-block;
+    color: #fff;
+}
+
+/* Action buttons */
+.viewpost-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.viewpost-actions .btn {
+    border-radius: 8px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Primary (filled) */
+.viewpost-actions .btn-primary {
+    background-color: #3F51B5;
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 12px rgba(63, 81, 181, 0.2);
+}
+
+.viewpost-actions .btn-primary:hover {
+    background-color: #303F9F;
+    box-shadow: 0 6px 18px rgba(63, 81, 181, 0.3);
+}
+
+/* Outline style */
+.viewpost-actions .btn-outline-primary {
+    border: 2px solid #3F51B5;
+    color: #3F51B5;
+    background-color: transparent;
+}
+
+.viewpost-actions .btn-outline-primary:hover {
+    background-color: #3F51B5;
+    color: #fff;
+}
+
+/* Secondary (gray) */
+.viewpost-actions .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.15);
+}
+
+.viewpost-actions .btn-secondary:hover {
+    background-color: #5a6268;
+    box-shadow: 0 6px 14px rgba(90, 98, 104, 0.2);
+}
