@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
-import '../CSS/Login.css';
+import '../css/Login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -13,15 +13,16 @@ const Login = () => {
         e.preventDefault();
         try {
             await authService.login(email, password);
-            navigate('/Profile');
+            navigate('/');
         } catch (error) {
             setError(error.message || 'Login failed');
         }
     };
 
-    const handleGoogleLogin = () => {
-        window.location.href = 'http://localhost:8080/oauth2/authorization/google';
-    };
+const handleGoogleLogin = () => {
+    // This should be the authorization endpoint, not the callback URL
+    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+};
 
     const handleFacebookLogin = () => {
         window.location.href = 'http://localhost:8080/oauth2/authorization/facebook';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { authService } from '../Services/authService';
-import '../CSS/Profile.css';
+import '../css/Profile.css';
 
 const Profile = () => {
     const [user, setUser] = useState(null);

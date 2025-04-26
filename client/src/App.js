@@ -8,7 +8,7 @@ import Register from './Pages/Register';
 import Profile from './Pages/Profile';
 
 
-
+import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 
 
 
@@ -32,6 +32,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
+          <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
           <Route path="/Profile" element={<Profile/>} />
 
           <Route path="/learning-plan" element={<h1>Learning Plan</h1>} />

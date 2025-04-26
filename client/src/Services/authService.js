@@ -5,7 +5,7 @@ const API_URL = 'http://localhost:8080/api';
 export const authService = {
     login: async (email, password) => {
         try {
-            const response = await axios.post(`${API_URL}/users/login`, { email, password });
+            const response = await axios.post(`${API_URL}/auth/login`, { email, password });
             localStorage.setItem('user', JSON.stringify(response.data));
             return response.data;
         } catch (error) {
@@ -15,8 +15,28 @@ export const authService = {
 
     register: async (userData) => {
         try {
-            const response = await axios.post(`${API_URL}/users/register`, userData);
-            return response.data;
+            // Create FormData if there's a profile image
+            if (userData.profileImage) {
+                const formData = new FormData();
+                Object.keys(userData).forEach(key => {
+                    if (key === 'profileImage') {
+                        formData.append('profileImage', userData.profileImage);
+                    } else {
+                        formData.append(key, userData[key]);
+                    }
+                });
+                
+                const response = await axios.post(`${API_URL}/auth/register`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                return response.data;
+            } else {
+                // Regular JSON request if no image
+                const response = await axios.post(`${API_URL}/auth/register`, userData);
+                return response.data;
+            }
         } catch (error) {
             if (error.response && error.response.data) {
                 throw error.response.data;
@@ -68,4 +88,4 @@ export const authService = {
             throw error.response.data;
         }
     }
-}; 
+};

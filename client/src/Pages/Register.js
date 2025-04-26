@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
-import '../CSS/Register.css';
+import '../css/Register.css';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -12,6 +12,8 @@ const Register = () => {
         lastName: '',
         bio: ''
     });
+    const [profileImage, setProfileImage] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -22,11 +24,31 @@ const Register = () => {
         });
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfileImage(file);
+            // Create preview
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreviewImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(''); // Clear any existing errors
+        
         try {
-            await authService.register(formData);
+            // Combine form data with profile image
+            const userData = { ...formData };
+            if (profileImage) {
+                userData.profileImage = profileImage;
+            }
+            
+            await authService.register(userData);
             navigate('/Login');
         } catch (error) {
             if (typeof error === 'string') {
@@ -100,6 +122,24 @@ const Register = () => {
                         onChange={handleChange}
                     />
                 </div>
+                <div className="form-group">
+                    <label>Profile Picture:</label>
+                    <input
+                        type="file"
+                        name="profileImage"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                    />
+                    {previewImage && (
+                        <div className="image-preview">
+                            <img 
+                                src={previewImage} 
+                                alt="Profile Preview" 
+                                style={{ maxWidth: '100px', maxHeight: '100px', marginTop: '10px' }} 
+                            />
+                        </div>
+                    )}
+                </div>
                 <button type="submit">Register</button>
             </form>
             <p>
@@ -112,4 +152,4 @@ const Register = () => {
     );
 };
 
-export default Register; 
+export default Register;
