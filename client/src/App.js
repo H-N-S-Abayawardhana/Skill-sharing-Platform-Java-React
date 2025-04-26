@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
-import AddLearningPlan from './pages/LearningPlan/AddLearningPlan';
-import EditLearningPlan from './pages/LearningPlan/EditLearningPlan';
-import ViewLearningPlan from './pages/LearningPlan/ViewLearningPlan';
+import Home from './Pages/Home';
+import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
+import EditLearningPlan from './Pages/LearningPlan/EditLearningPlan';
+import ViewLearningPlan from './Pages/LearningPlan/ViewLearningPlan';
 
-import PostsList from './Components/post/PostsList';
-import AddPost from './Components/post/AddPost';
-import EditPost from './Components/post/EditPost';
-import ViewPost from './Components/post/ViewPost';
+import PostsList from './components/post/PostsList';
+import AddPost from './components/post/AddPost';
+import EditPost from './components/post/EditPost';
+import ViewPost from './components/post/ViewPost';
 
 
 function App() {
