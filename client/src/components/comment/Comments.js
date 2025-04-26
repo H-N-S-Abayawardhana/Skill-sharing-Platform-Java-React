@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './../../css/Comments.css';
+import './Comments.css';
 
 const Comments = ({ learningPlanId, userId }) => {
   const [comments, setComments] = useState([]);
