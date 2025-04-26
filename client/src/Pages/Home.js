@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import '../css/HomePage.css';
+import NavBar from '../components/NavBar';
 
 export default function Home() {
   const [learningPlans, setLearningPlans] = useState([]);
@@ -49,6 +50,8 @@ export default function Home() {
   };
 
   return (
+  <>
+  <NavBar/>
     <div className="homepage-container">
       <div className="homepage-header">
         <h2 className="homepage-title">Learning Plans</h2>
@@ -140,5 +143,7 @@ export default function Home() {
         </div>
       )}
     </div>
+    
+    </>
   );
 }
