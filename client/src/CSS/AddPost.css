@@ -1,0 +1,129 @@
+/* AddPost.css */
+
+.add-post-container {
+    background-color: #F5F5F5;
+    min-height: 100vh;
+    padding: 20px 150px;
+    width: 80%;
+}
+
+.add-post-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 50px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-post-title {
+    color: #3F51B5;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    
+}
+
+.add-post-form-label {
+    color: #212121;
+    font-weight: 600;
+    margin-bottom: 8px;
+    padding: 10px 10px;
+    margin-right: 50px;
+}
+
+.add-post-form-input,
+.add-post-form-textarea,
+.add-post-form-file {
+    background: #F5F5F5;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px 14px;
+    width: 100%;
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: #212121;
+}
+
+.add-post-form-input:focus,
+.add-post-form-textarea:focus,
+.add-post-form-file:focus {
+    border-color: #3F51B5;
+    outline: none;
+}
+
+.add-post-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.add-post-submit-btn {
+    background-color: #3F51B5;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-post-submit-btn:hover {
+    background-color: #303F9F;
+}
+
+.add-post-cancel-btn {
+    background-color: #CDDC39;
+    color: #212121;
+    font-weight: bold;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-post-cancel-btn:hover {
+    background-color: #AFB42B;
+}
+
+.add-post-error {
+    background-color: #ffcccc;
+    color: #b00020;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.add-post-preview {
+    margin-top: 20px;
+}
+
+.add-post-preview h5 {
+    color: #3F51B5;
+    margin-bottom: 15px;
+}
+
+.add-post-preview-images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.add-post-preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+.add-post-preview-video {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
