@@ -43,8 +43,8 @@ const NavBar = () => {
                 Learning Plans
               </a>
               <ul className="dropdown-menu" aria-labelledby="learningDropdown">
-                <li><a className="dropdown-item" href="/learning/add">Add Learning Plan</a></li>
-                <li><a className="dropdown-item" href="/learning/view">View Learning Plans</a></li>
+                <li><a className="dropdown-item" href="/learning-plan/add">Add Learning Plan</a></li>
+                <li><a className="dropdown-item" href="/view-learning-plans">View Learning Plans</a></li>
               </ul>
             </li>
             

@@ -70,7 +70,7 @@ export default function Home() {
           <div className="homepage-empty-icon">📚</div>
           <h3>No learning plans found</h3>
           <p>Start your learning journey by creating your first plan!</p>
-          <Link to="/add-learning-plan" className="homepage-btn homepage-btn-primary">
+          <Link to="/learning-plan/add" className="homepage-btn homepage-btn-primary">
             Create Learning Plan
           </Link>
         </div>

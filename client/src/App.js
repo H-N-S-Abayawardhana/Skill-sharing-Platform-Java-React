@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Routes } from "react-router-dom";
-import Home from './pages/Home';
-import AddLearningPlan from './pages/LearningPlan/AddLearningPlan';
-import EditLearningPlan from './pages/LearningPlan/EditLearningPlan';
-import ViewLearningPlan from './pages/LearningPlan/ViewLearningPlan';
+import Home from './Pages/Home';
+import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
+import EditLearningPlan from './Pages/LearningPlan/EditLearningPlan';
+import ViewLearningPlan from './Pages/LearningPlan/ViewLearningPlan';
+import ViewLearningPlans from './Pages/LearningPlan/ViewLearningPlans';
+
 
 import PostsList from './components/post/PostsList';
 import AddPost from './components/post/AddPost';
@@ -21,6 +23,7 @@ function App() {
           <Route path="/learning-plan/add" element={<AddLearningPlan/>} />
           <Route path="/edit-learning-plan/:id" element={<EditLearningPlan />} />
           <Route path="/view-learning-plan/:id" element={<ViewLearningPlan />} />
+          <Route path="/view-learning-plans" element={<ViewLearningPlans/>}/>
 
             <Route path="/posts" element={<PostsList />} />
             <Route path="/add-post" element={<AddPost />} />
