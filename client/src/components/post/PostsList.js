@@ -80,6 +80,11 @@ export default function PostsList() {
         }
     };
 
+    // Check if the current user has liked a post
+    const hasUserLikedPost = (post) => {
+        return post.likes && post.likes.includes(currentUserId);
+    };
+
     return (
         <div className="postlist-container">
             <div className="posts-wrapper">
@@ -142,24 +147,29 @@ export default function PostsList() {
                             </div>
                             
                             <div className="post-engagement">
-                                <div className="post-likes">
+                                <div className={`post-likes ${hasUserLikedPost(post) ? 'you-liked' : ''}`}>
                                     <span className="likes-icon">
-                                        <i className="bi bi-hand-thumbs-up-fill"></i>
+                                        <i className={`bi ${hasUserLikedPost(post) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
                                     </span>
-                                    <span>{post.likes?.length || 0}</span>
+                                    <span>
+                                        {post.likes?.length || 0} 
+                                        {hasUserLikedPost(post) && post.likes?.length > 0 && (
+                                            <span className="liked-indicator"> • You liked this</span>
+                                        )}
+                                    </span>
                                 </div>
                                 <div className="post-comments-count" onClick={() => toggleComments(post.id)}>
-                                    {commentCounts[post.id] || 0} comments
+                                    {commentCounts[post.id] || 0} Comments
                                 </div>
                             </div>
                             
                             <div className="post-actions">
                                 <button 
-                                    className={`post-action-btn ${post.likes && post.likes.includes(currentUserId) ? 'liked' : ''}`}
+                                    className={`post-action-btn ${hasUserLikedPost(post) ? 'liked' : ''}`}
                                     onClick={() => handleLikePost(post.id)}
                                 >
-                                    <i className={`bi ${post.likes && post.likes.includes(currentUserId) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i> 
-                                    Like
+                                    <i className={`bi ${hasUserLikedPost(post) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i> 
+                                    {hasUserLikedPost(post) ? 'Liked' : 'Like'}
                                 </button>
                                 <button className="post-action-btn" onClick={() => toggleComments(post.id)}>
                                     <i className="bi bi-chat"></i> Comment
@@ -172,7 +182,11 @@ export default function PostsList() {
                             {/* Comments section */}
                             {activeCommentPostId === post.id && (
                                 <div className="post-comments-section">
-                                    <Comments postId={post.id} userId={currentUserId} />
+                                    <Comments 
+                                        postId={post.id} 
+                                        userId={currentUserId} 
+                                        showLikedIndicator={true} 
+                                    />
                                 </div>
                             )}
                             
