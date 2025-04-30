@@ -2,6 +2,8 @@ package Backend.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "comments")
@@ -13,26 +15,45 @@ public class CommentModel {
     @Column(length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "learning_plan_id", nullable = false)
-    private Long learningPlanId;
-
-    @Column(name = "user_id", nullable = false)
+    @Column(nullable = false)
     private Long userId;
+
+    @Column(nullable = false)
+    private Long postId;
+
+    // Optional parent comment ID for nested comments
+    private Long parentCommentId;
+
+    @ElementCollection
+    private List<Long> likes = new ArrayList<>();
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt = LocalDateTime.now();
+    
+    // Flag to indicate if the comment has been edited
+    private boolean edited = false;
 
     // Default constructor
     public CommentModel() {
     }
 
-    // Parameterized constructor
-    public CommentModel(String content, Long learningPlanId, Long userId) {
+    // Basic constructor
+    public CommentModel(String content, Long userId, Long postId) {
         this.content = content;
-        this.learningPlanId = learningPlanId;
         this.userId = userId;
+        this.postId = postId;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    // Full constructor with parent comment ID for nested comments
+    public CommentModel(String content, Long userId, Long postId, Long parentCommentId) {
+        this.content = content;
+        this.userId = userId;
+        this.postId = postId;
+        this.parentCommentId = parentCommentId;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -51,15 +72,11 @@ public class CommentModel {
     }
 
     public void setContent(String content) {
+        // If content is being updated and it's not the initial creation
+        if (this.id != null && !this.content.equals(content)) {
+            this.edited = true;
+        }
         this.content = content;
-    }
-
-    public Long getLearningPlanId() {
-        return learningPlanId;
-    }
-
-    public void setLearningPlanId(Long learningPlanId) {
-        this.learningPlanId = learningPlanId;
     }
 
     public Long getUserId() {
@@ -68,6 +85,30 @@ public class CommentModel {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public Long getParentCommentId() {
+        return parentCommentId;
+    }
+
+    public void setParentCommentId(Long parentCommentId) {
+        this.parentCommentId = parentCommentId;
+    }
+
+    public List<Long> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Long> likes) {
+        this.likes = likes;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -84,6 +125,14 @@ public class CommentModel {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    
+    public boolean isEdited() {
+        return edited;
+    }
+    
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 
     @PreUpdate
