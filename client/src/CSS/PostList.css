@@ -163,16 +163,22 @@
 .post-likes {
     display: flex;
     align-items: center;
+    color: #1877f2;
 }
 
 .likes-icon {
-    color: #1877f2;
     margin-right: 4px;
     font-size: 0.9rem;
 }
 
+.post-action-btn.liked {
+    color: #1877f2;
+    font-weight: 600;
+}
+
 .post-comments-count {
     cursor: pointer;
+    color: #1877f2;
 }
 
 .post-comments-count:hover {
