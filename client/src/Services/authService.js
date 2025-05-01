@@ -2,12 +2,22 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api';
 
+const getFullImageUrl = (imagePath) => {
+    if (!imagePath) return null;
+    if (imagePath.startsWith('http')) return imagePath;
+    return `http://localhost:8080${imagePath}`;
+};
+
 export const authService = {
     login: async (email, password) => {
         try {
             const response = await axios.post(`${API_URL}/auth/login`, { email, password });
-            localStorage.setItem('user', JSON.stringify(response.data));
-            return response.data;
+            const userData = response.data;
+            if (userData.profilePicture) {
+                userData.profilePicture = getFullImageUrl(userData.profilePicture);
+            }
+            localStorage.setItem('user', JSON.stringify(userData));
+            return userData;
         } catch (error) {
             throw error.response.data;
         }
@@ -57,10 +67,32 @@ export const authService = {
 
     updateProfile: async (userId, userData) => {
         try {
-            const response = await axios.put(`${API_URL}/users/${userId}`, userData);
-            return response.data;
+            let response;
+            if (userData.profileImage) {
+                const formData = new FormData();
+                Object.keys(userData).forEach(key => {
+                    formData.append(key, userData[key]);
+                });
+                
+                response = await axios.put(`${API_URL}/users/${userId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            } else {
+                response = await axios.put(`${API_URL}/users/${userId}`, userData, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+            }
+            const updatedUser = response.data;
+            if (updatedUser.profilePicture) {
+                updatedUser.profilePicture = getFullImageUrl(updatedUser.profilePicture);
+            }
+            return updatedUser;
         } catch (error) {
-            throw error.response.data;
+            throw error.response ? error.response.data : error.message;
         }
     },
 

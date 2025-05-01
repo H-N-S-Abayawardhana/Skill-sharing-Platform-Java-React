@@ -6,23 +6,18 @@ import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
 import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Profile from './Pages/Profile';
-
+import UpdateProfile from './Pages/UpdateProfile';
 
 import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
-
-
 
 import EditLearningPlan from './Pages/LearningPlan/EditLearningPlan';
 import ViewLearningPlan from './Pages/LearningPlan/ViewLearningPlan';
 import ViewLearningPlans from './Pages/LearningPlan/ViewLearningPlans';
 
-
 import PostsList from './components/post/PostsList';
 import AddPost from './components/post/AddPost';
 import EditPost from './components/post/EditPost';
 import ViewPost from './components/post/ViewPost';
-
-
 
 function App() {
   return (
@@ -30,10 +25,12 @@ function App() {
       
         <Routes>
           <Route path="/" element={<Login />} />
+          <Route path="/Home" element={<Home />} />  
           <Route path="/Login" element={<Login/>} />
           <Route path="/Register" element={<Register/>} />
           <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
           <Route path="/Profile" element={<Profile/>} />
+          <Route path="/update-profile" element={<UpdateProfile />} />
 
           <Route path="/learning-plan" element={<h1>Learning Plan</h1>} />
           <Route path="/learning-plan/add" element={<AddLearningPlan/>} />

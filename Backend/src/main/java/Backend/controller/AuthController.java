@@ -26,13 +26,27 @@ public class AuthController {
     @Autowired
     private UserService userService;
     
-    private final Path fileStoragePath = Paths.get("uploads/profile-images").toAbsolutePath().normalize();
+    private final Path fileStoragePath = Paths.get("Backend/uploads/profile-images").toAbsolutePath().normalize();
 
     public AuthController() {
         try {
             Files.createDirectories(fileStoragePath);
         } catch (IOException ex) {
             throw new RuntimeException("Could not create directory for uploaded files", ex);
+        }
+    }
+
+    @GetMapping("/users/profile-images/{fileName:.+}")
+    @ResponseBody
+    public ResponseEntity<byte[]> getProfileImage(@PathVariable String fileName) {
+        try {
+            Path imagePath = fileStoragePath.resolve(fileName);
+            byte[] imageBytes = Files.readAllBytes(imagePath);
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(imageBytes);
+        } catch (IOException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -60,7 +74,7 @@ public class AuthController {
                 String fileName = UUID.randomUUID().toString() + "_" + profileImage.getOriginalFilename();
                 Path targetLocation = fileStoragePath.resolve(fileName);
                 Files.copy(profileImage.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-                user.setProfilePicture("/api/users/profile-images/" + fileName);
+                user.setProfilePicture("/api/auth/users/profile-images/" + fileName);
             }
             
             User registeredUser = userService.registerUser(user);
@@ -109,6 +123,7 @@ public class AuthController {
                 response.put("firstName", user.getFirstName());
                 response.put("lastName", user.getLastName());
                 response.put("profilePicture", user.getProfilePicture());
+                response.put("bio", user.getBio());
                 // Don't include password in the response
                 
                 return ResponseEntity.ok(response);

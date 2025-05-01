@@ -1,28 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
-import '../css/Register.css';
+import '../css/UpdateProfile.css';
 import Navbar from '../components/NavBar'
 
-const Register = () => {
+const UpdateProfile = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
-        password: '',
         firstName: '',
         lastName: '',
-        bio: ''
+        bio: '',
     });
     const [profileImage, setProfileImage] = useState(null);
     const [previewImage, setPreviewImage] = useState(null);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    useEffect(() => {
+        const currentUser = authService.getCurrentUser();
+        if (!currentUser) {
+            navigate('/Login');
+            return;
+        }
         setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
+            username: currentUser.username || '',
+            email: currentUser.email || '',
+            firstName: currentUser.firstName || '',
+            lastName: currentUser.lastName || '',
+            bio: currentUser.bio || '',
         });
+        if (currentUser.profilePicture) {
+            setPreviewImage(currentUser.profilePicture);
+        }
+    }, [navigate]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     };
 
     const handleImageChange = (e) => {
@@ -40,25 +59,27 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(''); // Clear any existing errors
-        
+        setLoading(true);
+        setError('');
+
         try {
-            // Combine form data with profile image
-            const userData = { ...formData };
+            const currentUser = authService.getCurrentUser();
+            if (!currentUser || !currentUser.id) {
+                throw new Error('User not found');
+            }
+
+            const updateData = { ...formData };
             if (profileImage) {
-                userData.profileImage = profileImage;
+                updateData.profileImage = profileImage;
             }
-            
-            await authService.register(userData);
-            navigate('/Login');
-        } catch (error) {
-            if (typeof error === 'string') {
-                setError(error);
-            } else if (error.message) {
-                setError(error.message);
-            } else {
-                setError('Registration failed. Please try again.');
-            }
+
+            const updatedUser = await authService.updateProfile(currentUser.id, updateData);
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+            navigate('/Profile');
+        } catch (err) {
+            setError(err.message || 'Failed to update profile');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -66,10 +87,30 @@ const Register = () => {
         <div>
             <Navbar/>
        
-        <div className="register-container">
-            <h2>Register</h2>
+        <div className="update-profile-container">
+            <h2>Update Profile</h2>
             {error && <div className="error-message">{error}</div>}
-            <form onSubmit={handleSubmit}>
+            
+            <form onSubmit={handleSubmit} className="update-profile-form">
+                <div className="form-group">
+                    <label>Profile Picture:</label>
+                    <input
+                        type="file"
+                        name="profileImage"
+                        onChange={handleImageChange}
+                        accept="image/*"
+                    />
+                    {previewImage && (
+                        <div className="image-preview">
+                            <img
+                                src={previewImage}
+                                alt="Profile Preview"
+                                className="preview-image"
+                            />
+                        </div>
+                    )}
+                </div>
+
                 <div className="form-group">
                     <label>Username:</label>
                     <input
@@ -80,6 +121,7 @@ const Register = () => {
                         required
                     />
                 </div>
+
                 <div className="form-group">
                     <label>Email:</label>
                     <input
@@ -90,16 +132,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
-                    <label>Password:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+
                 <div className="form-group">
                     <label>First Name:</label>
                     <input
@@ -109,6 +142,7 @@ const Register = () => {
                         onChange={handleChange}
                     />
                 </div>
+
                 <div className="form-group">
                     <label>Last Name:</label>
                     <input
@@ -118,43 +152,29 @@ const Register = () => {
                         onChange={handleChange}
                     />
                 </div>
+
                 <div className="form-group">
                     <label>Bio:</label>
                     <textarea
                         name="bio"
                         value={formData.bio}
                         onChange={handleChange}
+                        rows="4"
                     />
                 </div>
-                <div className="form-group">
-                    <label>Profile Picture:</label>
-                    <input
-                        type="file"
-                        name="profileImage"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                    />
-                    {previewImage && (
-                        <div className="image-preview">
-                            <img 
-                                src={previewImage} 
-                                alt="Profile Preview" 
-                                style={{ maxWidth: '100px', maxHeight: '100px', marginTop: '10px' }} 
-                            />
-                        </div>
-                    )}
+
+                <div className="button-group">
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Updating...' : 'Update Profile'}
+                    </button>
+                    <button type="button" onClick={() => navigate('/Profile')} className="cancel-button">
+                        Cancel
+                    </button>
                 </div>
-                <button type="submit">Register</button>
             </form>
-            <p>
-                Already have an account?{' '}
-                <span onClick={() => navigate('/Login')} className="link">
-                    Login here
-                </span>
-            </p>
         </div>
         </div>
     );
 };
 
-export default Register;
+export default UpdateProfile; 

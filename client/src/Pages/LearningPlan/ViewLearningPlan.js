@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
 import '../../css/ViewLearningPlan.css';
+import NavBar from '../../components/NavBar';
 
 export default function ViewLearningPlan() {
   const [learningPlan, setLearningPlan] = useState(null);
@@ -62,6 +63,8 @@ export default function ViewLearningPlan() {
   }
 
   return (
+    <>
+    <NavBar/>
     <div className="view-learning-plan-container">
       <div className="view-learning-plan-card">
         <div className="view-learning-plan-header">
@@ -175,5 +178,6 @@ export default function ViewLearningPlan() {
         </div>
       </div>
     </div>
+    </>
   );
 }
