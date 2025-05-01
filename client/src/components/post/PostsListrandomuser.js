@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/PostList.css';
-import Comments from '../comment/Comments'; // Import the Comments component
+import Comments from '../comment/Comments'; 
+import NavBar from '../../components/NavBar';
 
 export default function PostsList() {
     const [posts, setPosts] = useState([]);
@@ -86,6 +87,8 @@ export default function PostsList() {
     };
 
     return (
+        <>
+      <NavBar />
         <div className="postlist-container">
             <div className="posts-wrapper">
                 <div className="postlist-header">
@@ -211,5 +214,7 @@ export default function PostsList() {
                 )}
             </div>
         </div>
+        </>
     );
+
 }
