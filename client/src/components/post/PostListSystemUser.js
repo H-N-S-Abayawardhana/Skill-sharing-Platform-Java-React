@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../css/PostList.css';
 import Comments from '../comment/Comments'; // Import the Comments component
 
-export default function PostsList() {
+export default function PostsListS() {
     const [posts, setPosts] = useState([]);
     const [activeCommentPostId, setActiveCommentPostId] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(1); // This should come from your auth context
@@ -163,7 +163,7 @@ export default function PostsList() {
                                 </div>
                             </div>
                             
-                            <div className="post-actions">
+                            {/* <div className="post-actions">
                                 <button 
                                     className={`post-action-btn ${hasUserLikedPost(post) ? 'liked' : ''}`}
                                     onClick={() => handleLikePost(post.id)}
@@ -177,7 +177,7 @@ export default function PostsList() {
                                 <button className="post-action-btn">
                                     <i className="bi bi-share"></i> Share
                                 </button>
-                            </div>
+                            </div> */}
                             
                             {/* Comments section */}
                             {activeCommentPostId === post.id && (
