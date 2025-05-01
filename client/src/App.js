@@ -7,10 +7,11 @@ import ViewLearningPlan from './Pages/LearningPlan/ViewLearningPlan';
 import ViewLearningPlans from './Pages/LearningPlan/ViewLearningPlans';
 
 
-import PostsList from './components/post/PostsList';
+import PostsList from './components/post/PostsListrandomuser';
 import AddPost from './components/post/AddPost';
 import EditPost from './components/post/EditPost';
 import ViewPost from './components/post/ViewPost';
+import PostsListS from './components/post/PostListSystemUser';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/add-post" element={<AddPost />} />
             <Route path="/edit-post/:id" element={<EditPost />} />
             <Route path="/view-post/:id" element={<ViewPost />} />
+            <Route path="/PostListSystemUser" element={<PostsListS />} />
         </Routes>
       
 
