@@ -1,9 +1,9 @@
-/* HomePage.css */
+
 :root {
-  --primary-color: #3F51B5; /* Indigo Blue */
+  --primary-color: #3F51B5; 
   --primary-light: #757de8;
   --primary-dark: #303f9f;
-  --accent-color: #00BCD4; /* Sky Blue */
+  --accent-color: #00BCD4; 
   --accent-color-alt: #CDDC39; /* Lime Green */
   --background-color: #F5F5F5; /* Light Gray */
   --card-background: #ffffff;
