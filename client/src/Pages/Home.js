@@ -31,7 +31,7 @@ export default function Home() {
     if (window.confirm("Are you sure you want to delete this learning plan?")) {
       try {
         await axios.delete(`http://localhost:8080/api/learning-plan/${id}`);
-        loadLearningPlans(); // Reload the list after deletion
+        loadLearningPlans(); 
       } catch (error) {
         console.error("Error deleting learning plan:", error);
       }
