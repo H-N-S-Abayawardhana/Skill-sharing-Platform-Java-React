@@ -10,7 +10,7 @@ import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 import EditLearningPlan from './Pages/LearningPlan/EditLearningPlan';
 import ViewLearningPlan from './Pages/LearningPlan/ViewLearningPlan';
 import ViewLearningPlans from './Pages/LearningPlan/ViewLearningPlans';
-import PostsList from './components/post/PostsList';
+//import PostsList from './components/post/PostsList';
 import PostsList from './components/post/PostsListrandomuser';
 import AddPost from './components/post/AddPost';
 import EditPost from './components/post/EditPost';
@@ -34,7 +34,7 @@ function App() {
           <Route path="/edit-learning-plan/:id" element={<EditLearningPlan />} />
           <Route path="/view-learning-plan/:id" element={<ViewLearningPlan />} />
           <Route path="/view-learning-plans" element={<ViewLearningPlans/>}/>
-          <Route path="/posts" element={<PostsList />} />
+          <Route path="/PostsListrandomuser" element={<PostsList />} />
           <Route path="/add-post" element={<AddPost />} />
           <Route path="/edit-post/:id" element={<EditPost />} />
           <Route path="/view-post/:id" element={<ViewPost />} />
