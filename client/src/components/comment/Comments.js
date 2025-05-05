@@ -25,7 +25,7 @@ export default function Comments({ postId, userId }) {
             // Get top-level comments for the post
             const result = await axios.get(`http://localhost:8080/api/posts/${postId}/top-comments`);
             setComments(result.data);
-            
+
             // Load replies for each comment
             const repliesMap = {};
             for (const comment of result.data) {
@@ -73,7 +73,7 @@ export default function Comments({ postId, userId }) {
             };
 
             await axios.post(`http://localhost:8080/api/comments/${commentId}/replies`, reply);
-            setReplyContents({...replyContents, [commentId]: ''});
+            setReplyContents({ ...replyContents, [commentId]: '' });
             setActiveReplyId(null);
             loadComments();
         } catch (error) {
@@ -153,9 +153,9 @@ export default function Comments({ postId, userId }) {
     const formatDate = (timestamp) => {
         if (!timestamp) return "Just now";
         const date = new Date(timestamp);
-        return date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'short', 
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
             day: 'numeric',
             hour: '2-digit',
             minute: '2-digit'
@@ -188,7 +188,7 @@ export default function Comments({ postId, userId }) {
                         className="comment-input"
                     />
                 </div>
-                <button type="submit" className="comment-submit-btn">Post</button>
+                <button type="submit" className="comment-submit-btn">Comment</button>
             </form>
 
             {/* Comments list */}
@@ -209,7 +209,7 @@ export default function Comments({ postId, userId }) {
                                     <div className="comment-timestamp">{formatDate(comment.createdAt)}</div>
                                 </div>
                             </div>
-                            
+
                             {/* Show edit form if this comment is being edited, otherwise show content */}
                             {editingCommentId === comment.id ? (
                                 <form className="edit-comment-form" onSubmit={(e) => handleEditSubmit(e, comment.id)}>
@@ -230,38 +230,38 @@ export default function Comments({ postId, userId }) {
                             ) : (
                                 <div className="comment-content">{comment.content}</div>
                             )}
-                            
+
                             {/* Only show actions if not currently editing */}
                             {editingCommentId !== comment.id && (
                                 <div className="comment-actions">
-                                    <button 
+                                    <button
                                         className={`comment-like-btn ${hasUserLiked(comment.likes) ? 'liked' : ''}`}
-                                        onClick={() => hasUserLiked(comment.likes) 
-                                            ? handleUnlikeComment(comment.id) 
+                                        onClick={() => hasUserLiked(comment.likes)
+                                            ? handleUnlikeComment(comment.id)
                                             : handleLikeComment(comment.id)
                                         }
                                     >
                                         <i className={`bi ${hasUserLiked(comment.likes) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
                                         {comment.likes?.length || 0} Like
                                     </button>
-                                    
-                                    <button 
+
+                                    <button
                                         className="comment-reply-btn"
                                         onClick={() => toggleReplyForm(comment.id)}
                                     >
                                         <i className="bi bi-reply"></i> Reply
                                     </button>
-                                    
+
                                     {comment.userId === userId && (
                                         <>
-                                            <button 
+                                            <button
                                                 className="comment-edit-btn"
                                                 onClick={() => startEditing(comment)}
                                             >
                                                 <i className="bi bi-pencil"></i> Edit
                                             </button>
-                                            
-                                            <button 
+
+                                            <button
                                                 className="comment-delete-btn"
                                                 onClick={() => handleDeleteComment(comment.id)}
                                             >
@@ -313,7 +313,7 @@ export default function Comments({ postId, userId }) {
                                                     <div className="reply-timestamp">{formatDate(reply.createdAt)}</div>
                                                 </div>
                                             </div>
-                                            
+
                                             {/* Show edit form for replies too */}
                                             {editingCommentId === reply.id ? (
                                                 <form className="edit-reply-form" onSubmit={(e) => handleEditSubmit(e, reply.id)}>
@@ -334,31 +334,31 @@ export default function Comments({ postId, userId }) {
                                             ) : (
                                                 <div className="reply-content">{reply.content}</div>
                                             )}
-                                            
+
                                             {/* Only show actions if not currently editing */}
                                             {editingCommentId !== reply.id && (
                                                 <div className="reply-actions">
-                                                    <button 
+                                                    <button
                                                         className={`reply-like-btn ${hasUserLiked(reply.likes) ? 'liked' : ''}`}
-                                                        onClick={() => hasUserLiked(reply.likes) 
-                                                            ? handleUnlikeComment(reply.id) 
+                                                        onClick={() => hasUserLiked(reply.likes)
+                                                            ? handleUnlikeComment(reply.id)
                                                             : handleLikeComment(reply.id)
                                                         }
                                                     >
                                                         <i className={`bi ${hasUserLiked(reply.likes) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
                                                         {reply.likes?.length || 0}
                                                     </button>
-                                                    
+
                                                     {reply.userId === userId && (
                                                         <>
-                                                            <button 
+                                                            <button
                                                                 className="reply-edit-btn"
                                                                 onClick={() => startEditing(reply)}
                                                             >
                                                                 <i className="bi bi-pencil"></i> Edit
                                                             </button>
-                                                            
-                                                            <button 
+
+                                                            <button
                                                                 className="reply-delete-btn"
                                                                 onClick={() => handleDeleteComment(reply.id)}
                                                             >
