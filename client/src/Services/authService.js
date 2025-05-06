@@ -56,8 +56,22 @@ export const authService = {
         }
     },
 
-    logout: () => {
-        localStorage.removeItem('user');
+    logout: async () => {
+        try {
+            // Clear local storage
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            
+            // Call backend logout endpoint if you have one
+            await axios.post('http://localhost:8080/api/auth/logout');
+            
+            return true;
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Still clear local storage even if backend call fails
+            localStorage.clear();
+            return false;
+        }
     },
 
     getCurrentUser: () => {
@@ -80,11 +94,7 @@ export const authService = {
                     }
                 });
             } else {
-                response = await axios.put(`${API_URL}/users/${userId}`, userData, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
+                response = await axios.put(`${API_URL}/users/${userId}`, userData);
             }
             const updatedUser = response.data;
             if (updatedUser.profilePicture) {
@@ -94,6 +104,23 @@ export const authService = {
         } catch (error) {
             throw error.response ? error.response.data : error.message;
         }
+    },
+
+    updateOAuthProfile: async (formData) => {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${API_URL}/users/profile`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update profile');
+        }
+
+        return await response.json();
     },
 
     deleteProfile: async (userId) => {

@@ -30,6 +30,12 @@ const Profile = () => {
         }
     };
 
+    const handleLogout = async () => {
+        await authService.logout();
+        navigate('/login');
+    };
+
+
     if (!user) return <div>Loading...</div>;
 
     return (
@@ -62,6 +68,12 @@ const Profile = () => {
                     <button onClick={handleDelete} className="delete-button">
                         Delete Profile
                     </button>
+                    <button 
+                className="logout-button" 
+                onClick={handleLogout}
+            >
+                Logout
+            </button>
                 </div>
             </div>
         </div>

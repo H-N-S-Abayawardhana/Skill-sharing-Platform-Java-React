@@ -85,4 +85,30 @@ button:hover {
 
 .link:hover {
     color: #0056b3;
-} 
+}
+
+.oauth-info {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.separator span {
+    padding: 0 10px;
+    color: #666;
+    font-size: 0.9em;
+}
