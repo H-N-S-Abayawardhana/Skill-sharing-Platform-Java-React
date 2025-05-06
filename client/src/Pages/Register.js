@@ -380,6 +380,7 @@ const Register = () => {
                                             >
                                                 {errors.lastName}
                                             </motion.div>
+                                            
                                         )}
                                     </div>
                                 </div>
