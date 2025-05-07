@@ -31,7 +31,7 @@ export default function EditPost() {
             tags: tags.split(',').map(tag => tag.trim())
         };
         await axios.put(`http://localhost:8080/api/posts/${id}`, updatedPost);
-        navigate('/posts');
+        navigate('/PostsListrandomuser');
     };
 
     return (
