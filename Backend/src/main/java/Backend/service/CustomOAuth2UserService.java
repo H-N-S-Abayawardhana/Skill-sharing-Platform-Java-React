@@ -45,8 +45,15 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
         if(userOptional.isPresent()) {
             user = userOptional.get();
-            // Update existing user with data from OAuth provider
-            updateExistingUser(user, oAuth2UserInfo);
+            // Update existing user data only if it was originally created via OAuth
+            if ("local".equals(user.getProvider())) {
+                // For local users, don't override their profile picture or other info
+                // Just update provider details for future logins
+                updateLocalUserWithOAuthInfo(user, oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2UserInfo.getId());
+            } else {
+                // For OAuth-created users, update with provider data
+                updateExistingUser(user, oAuth2UserInfo);
+            }
         } else {
             // Register new user with OAuth data
             user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
@@ -77,7 +84,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private void updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
-        existingUser.setProfilePicture(oAuth2UserInfo.getImageUrl());
+        // Only update profile picture if the user was created via OAuth (not local)
+        if (!"local".equals(existingUser.getProvider())) {
+            existingUser.setProfilePicture(oAuth2UserInfo.getImageUrl());
+        }
+        userRepository.save(existingUser);
+    }
+    
+    private void updateLocalUserWithOAuthInfo(User existingUser, String provider, String providerId) {
+        // For local users, just update provider info, but keep the provider as "local"
+        // This indicates they registered locally but also have used OAuth
+        existingUser.setProviderId(providerId);
         userRepository.save(existingUser);
     }
 }

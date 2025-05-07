@@ -58,6 +58,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         userData.put("firstName", user.getFirstName());
         userData.put("lastName", user.getLastName());
         userData.put("profilePicture", user.getProfilePicture());
+        userData.put("bio", user.getBio()); 
         
         // Convert userData to JSON
         String userDataJson = new ObjectMapper().writeValueAsString(userData);
