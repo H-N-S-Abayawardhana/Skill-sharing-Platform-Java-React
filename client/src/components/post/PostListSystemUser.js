@@ -9,6 +9,8 @@ export default function PostsListS() {
     const [activeCommentPostId, setActiveCommentPostId] = useState(null);
     const [currentUserId, setCurrentUserId] = useState(1); // This should come from your auth context
     const [commentCounts, setCommentCounts] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     
     useEffect(() => {
         loadPosts();
@@ -17,24 +19,49 @@ export default function PostsListS() {
     
     const loadPosts = async () => {
         try {
+            setLoading(true);
+            console.log("Fetching posts...");
             const result = await axios.get('http://localhost:8080/api/posts');
-            setPosts(result.data);
+            console.log("Posts fetched:", result.data);
+            
+            // Make sure posts is always an array
+            const postsData = Array.isArray(result.data) ? result.data : 
+                             (result.data && result.data.content ? result.data.content : []);
+            
+            console.log("Processed posts data:", postsData);
+            setPosts(postsData);
             
             // Fetch comment counts for each post
             const counts = {};
-            for (const post of result.data) {
-                const commentsResult = await axios.get(`http://localhost:8080/api/posts/${post.id}/comments`);
-                counts[post.id] = commentsResult.data.length;
+            for (const post of postsData) {
+                try {
+                    const commentsResult = await axios.get(`http://localhost:8080/api/posts/${post.id}/comments`);
+                    counts[post.id] = Array.isArray(commentsResult.data) ? 
+                                     commentsResult.data.length : 
+                                     (commentsResult.data && commentsResult.data.content ? 
+                                      commentsResult.data.content.length : 0);
+                } catch (err) {
+                    console.error(`Error fetching comments for post ${post.id}:`, err);
+                    counts[post.id] = 0;
+                }
             }
             setCommentCounts(counts);
+            setLoading(false);
         } catch (error) {
             console.error("Error loading posts:", error);
+            setError(`Failed to load posts: ${error.message}`);
+            setLoading(false);
         }
     };
     
     const deletePost = async (id) => {
-        await axios.delete(`http://localhost:8080/api/posts/${id}`);
-        loadPosts();
+        try {
+            await axios.delete(`http://localhost:8080/api/posts/${id}`);
+            loadPosts();
+        } catch (error) {
+            console.error("Error deleting post:", error);
+            alert("Failed to delete post");
+        }
     };
 
     // Toggle comments visibility for a post
@@ -51,7 +78,7 @@ export default function PostsListS() {
         return title ? title.charAt(0).toUpperCase() : "P";
     };
 
-    // Format timestamp (placeholder function - replace with actual date formatting)
+    // Format timestamp
     const formatDate = (timestamp) => {
         if (!timestamp) return "Just now";
         const date = new Date(timestamp);
@@ -77,6 +104,7 @@ export default function PostsListS() {
             loadPosts();
         } catch (error) {
             console.error("Error handling post like:", error);
+            alert("Failed to update like status");
         }
     };
 
@@ -104,7 +132,11 @@ export default function PostsListS() {
                     </div>
                 </div>
             
-                {posts.length === 0 ? (
+                {loading ? (
+                    <div className="postlist-loading">Loading posts...</div>
+                ) : error ? (
+                    <div className="postlist-error">{error}</div>
+                ) : posts.length === 0 ? (
                     <div className="postlist-empty">
                         <div className="postlist-empty-icon">
                             <i className="bi bi-journal-text"></i>
@@ -126,7 +158,7 @@ export default function PostsListS() {
                             
                             <div className="post-content">
                                 <h3 className="post-title">{post.title}</h3>
-                                <p>{post.content.length > 250 
+                                <p>{post.content?.length > 250 
                                     ? post.content.substring(0, 250) + '...' 
                                     : post.content}
                                 </p>
@@ -163,7 +195,8 @@ export default function PostsListS() {
                                 </div>
                             </div>
                             
-                            {/* <div className="post-actions">
+                            {/* Post Actions */}
+                            <div className="post-actions">
                                 <button 
                                     className={`post-action-btn ${hasUserLikedPost(post) ? 'liked' : ''}`}
                                     onClick={() => handleLikePost(post.id)}
@@ -177,7 +210,7 @@ export default function PostsListS() {
                                 <button className="post-action-btn">
                                     <i className="bi bi-share"></i> Share
                                 </button>
-                            </div> */}
+                            </div>
                             
                             {/* Comments section */}
                             {activeCommentPostId === post.id && (

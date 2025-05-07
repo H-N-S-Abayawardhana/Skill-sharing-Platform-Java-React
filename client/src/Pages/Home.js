@@ -19,9 +19,10 @@ export default function Home() {
     setLoading(true);
     try {
       const result = await axios.get("http://localhost:8080/api/learning-plans");
-      setLearningPlans(result.data);
+      setLearningPlans(Array.isArray(result.data) ? result.data : []);
     } catch (error) {
       console.error("Error loading learning plans:", error);
+      setLearningPlans([]); // Set to empty array on error
     } finally {
       setLoading(false);
     }
@@ -51,10 +52,12 @@ export default function Home() {
     }
   };
 
-  const filteredPlans = learningPlans
-    .filter(plan => plan.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                   plan.description.toLowerCase().includes(searchTerm.toLowerCase()))
-    .filter(plan => filterStatus === 'ALL' ? true : plan.status === filterStatus);
+  const filteredPlans = Array.isArray(learningPlans) 
+    ? learningPlans
+        .filter(plan => plan.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                       plan.description.toLowerCase().includes(searchTerm.toLowerCase()))
+        .filter(plan => filterStatus === 'ALL' ? true : plan.status === filterStatus)
+    : [];
 
   return (
     <>
