@@ -30,6 +30,7 @@ export default function Comments({ postId, userId }) {
             const repliesMap = {};
             for (const comment of result.data) {
                 const repliesResult = await axios.get(`http://localhost:8080/api/comments/${comment.id}/replies`);
+                console.log("Replies for comment", comment.id, ":", repliesResult.data);
                 repliesMap[comment.id] = repliesResult.data;
             }
             setReplies(repliesMap);
@@ -300,7 +301,7 @@ export default function Comments({ postId, userId }) {
                             )}
 
                             {/* Replies list */}
-                            {replies[comment.id] && replies[comment.id].length > 0 && (
+                            {Array.isArray(replies[comment.id]) && replies[comment.id].length > 0 && (
                                 <div className="replies-list">
                                     {replies[comment.id].map((reply) => (
                                         <div key={reply.id} className="reply-item">
