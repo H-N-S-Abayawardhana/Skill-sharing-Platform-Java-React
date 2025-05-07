@@ -84,15 +84,15 @@ const UpdateProfile = () => {
     };
 
     return (
-        <div>
+        <div className="UpdateProfile-div">
             <Navbar/>
        
-        <div className="update-profile-container">
+        <div className="UpdateProfile-update-profile-container">
             <h2>Update Profile</h2>
-            {error && <div className="error-message">{error}</div>}
+            {error && <div className="UpdateProfile-error-message">{error}</div>}
             
-            <form onSubmit={handleSubmit} className="update-profile-form">
-                <div className="form-group">
+            <form onSubmit={handleSubmit} className="UpdateProfile-update-profile-form">
+                <div className="UpdateProfile-form-group">
                     <label>Profile Picture:</label>
                     <input
                         type="file"
@@ -101,17 +101,17 @@ const UpdateProfile = () => {
                         accept="image/*"
                     />
                     {previewImage && (
-                        <div className="image-preview">
+                        <div className="UpdateProfile-image-preview">
                             <img
                                 src={previewImage}
                                 alt="Profile Preview"
-                                className="preview-image"
+                                className="UpdateProfile-preview-image"
                             />
                         </div>
                     )}
                 </div>
 
-                <div className="form-group">
+                <div className="UpdateProfile-form-group">
                     <label>Username:</label>
                     <input
                         type="text"
@@ -122,7 +122,7 @@ const UpdateProfile = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="UpdateProfile-form-group">
                     <label>Email:</label>
                     <input
                         type="email"
@@ -133,7 +133,7 @@ const UpdateProfile = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="UpdateProfile-form-group">
                     <label>First Name:</label>
                     <input
                         type="text"
@@ -143,7 +143,7 @@ const UpdateProfile = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="UpdateProfile-form-group">
                     <label>Last Name:</label>
                     <input
                         type="text"
@@ -153,7 +153,7 @@ const UpdateProfile = () => {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="UpdateProfile-form-group">
                     <label>Bio:</label>
                     <textarea
                         name="bio"
@@ -163,11 +163,11 @@ const UpdateProfile = () => {
                     />
                 </div>
 
-                <div className="button-group">
+                <div className="UpdateProfile-button-group">
                     <button type="submit" disabled={loading}>
                         {loading ? 'Updating...' : 'Update Profile'}
                     </button>
-                    <button type="button" onClick={() => navigate('/Profile')} className="cancel-button">
+                    <button type="button" onClick={() => navigate('/Profile')} className="UpdateProfile-cancel-button">
                         Cancel
                     </button>
                 </div>
@@ -177,4 +177,4 @@ const UpdateProfile = () => {
     );
 };
 
-export default UpdateProfile; 
+export default UpdateProfile;

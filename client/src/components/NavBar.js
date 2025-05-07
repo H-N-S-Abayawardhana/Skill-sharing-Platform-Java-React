@@ -1,18 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { User, LogOut, UserPlus } from 'lucide-react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/NavBar.css';
 
 const NavBar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isAuthenticated = localStorage.getItem('token'); // Check if user is authenticated
 
   const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed);
+
+  const handleSignIn = () => {
+    navigate('/Login');
+  };
+
+  const handleSignUp = () => {
+    navigate('/Register');
+  };
+
+  const handleLogout = async () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    setUser(null);
+    setIsProfileDropdownOpen(false);
+    navigate('/');
+  };
+
+  const toggleProfileDropdown = (e) => {
+    e.stopPropagation();
+    setIsProfileDropdownOpen(!isProfileDropdownOpen);
+  };
+
+  useEffect(() => {
+    const closeDropdowns = (e) => {
+      if (!e.target.closest('.user-navbar-profile')) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('click', closeDropdowns);
+    return () => document.removeEventListener('click', closeDropdowns);
+  }, []);
+
+  useEffect(() => {
+    // Fetch user data from localStorage or authService if needed
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
       <div className="container">
-        <a className="navbar-brand" href="/">
-          <span>SkillTribe</span>
-        </a>
+        <div className="navbar-brand">
+          <Link to="/" className="brand-link">
+            <span>SkillTribe</span>
+          </Link>
+        </div>
         
         <button 
           className="navbar-toggler" 
@@ -64,17 +115,91 @@ const NavBar = () => {
             </li>
           </ul>
           
-          <div className="navbar-auth d-flex align-items-center">
-            <button className="btn btn-outline-light me-2">Sign In</button>
-            <button className="btn btn-accent">Sign Up</button>
-            <div className="navbar-profile ms-3">
-              <div className="profile-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
-                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                  <path fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                </svg>
+          <div className="navbar-auth">
+            {!isAuthenticated ? (
+              <>
+                <button 
+                  className="btn btn-outline-light" 
+                  onClick={handleSignIn}
+                >
+                  Sign In
+                </button>
+                <button 
+                  className="btn btn-accent" 
+                  onClick={handleSignUp}
+                >
+                  Sign Up
+                </button>
+                {/* Profile image displayed to the right of Sign Up button */}
+                {user && user.profilePicture && (
+                  <div className="navbar-profile-image-container">
+                    <img
+                      src={user.profilePicture || '/ProfailIcon.jpg'}
+                      alt={user.username}
+                      className="navbar-profile-image"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/ProfailIcon.jpg';
+                      }}
+                    />
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="user-navbar-user-section">
+                {user ? (
+                  <div className="user-navbar-profile" onClick={(e) => e.stopPropagation()}>
+                    <div className="user-navbar-user">
+                      <div className="user-navbar-profile-icon" onClick={toggleProfileDropdown}>
+                        {user.profilePicture ? (
+                          <img
+                            src={user.profilePicture}
+                            alt={user.username}
+                            className="navbar-profile-image"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = '/ProfailIcon.jpg';
+                            }}
+                          />
+                        ) : (
+                          <div className="user-navbar-avatar-placeholder">
+                            <User size={20} />
+                          </div>
+                        )}
+                      </div>
+                      {isProfileDropdownOpen && (
+                        <div className="user-navbar-dropdown">
+                          <div className="user-navbar-dropdown-header">
+                            <span className="user-navbar-greeting">Hello, {user.username || 'User'}!</span>
+                          </div>
+                          <ul className="user-navbar-dropdown-menu">
+                            <li className="user-navbar-dropdown-item">
+                              <Link to="/profile" className="user-navbar-dropdown-link">
+                                <User size={16} /> Profile
+                              </Link>
+                            </li>
+                            <li className="user-navbar-dropdown-divider"></li>
+                            <li className="user-navbar-dropdown-item">
+                              <button className="user-navbar-logout-btn" onClick={handleLogout}>
+                                <LogOut size={16} /> Logout
+                              </button>
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="user-navbar-auth-buttons">
+                    <Link to="/login" className="user-navbar-login-btn">Login</Link>
+                    <Link to="/register" className="user-navbar-signup-btn">
+                      <UserPlus size={16} className="user-navbar-signup-icon" />
+                      <span>Sign Up</span>
+                    </Link>
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

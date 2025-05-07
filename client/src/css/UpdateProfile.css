@@ -1,4 +1,4 @@
-.update-profile-container {
+.UpdateProfile-update-profile-container {
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
@@ -7,61 +7,61 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.update-profile-container h2 {
+.UpdateProfile-update-profile-container h2 {
     text-align: center;
     color: #333;
     margin-bottom: 2rem;
 }
 
-.update-profile-form {
+.UpdateProfile-update-profile-form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 }
 
-.form-group {
+.UpdateProfile-form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.form-group label {
+.UpdateProfile-form-group label {
     font-weight: 500;
     color: #555;
 }
 
-.form-group input,
-.form-group textarea {
+.UpdateProfile-form-group input,
+.UpdateProfile-form-group textarea {
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
 }
 
-.form-group textarea {
+.UpdateProfile-form-group textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-.image-preview {
+.UpdateProfile-image-preview {
     margin-top: 1rem;
     text-align: center;
 }
 
-.preview-image {
+.UpdateProfile-preview-image {
     max-width: 200px;
     max-height: 200px;
     border-radius: 50%;
     object-fit: cover;
 }
 
-.button-group {
+.UpdateProfile-button-group {
     display: flex;
     gap: 1rem;
     margin-top: 1rem;
 }
 
-.button-group button {
+.UpdateProfile-button-group button {
     flex: 1;
     padding: 0.75rem;
     border: none;
@@ -71,30 +71,30 @@
     transition: background-color 0.2s;
 }
 
-.button-group button[type="submit"] {
+.UpdateProfile-button-group button[type="submit"] {
     background-color: #28a745;
     color: white;
 }
 
-.button-group button[type="submit"]:hover {
+.UpdateProfile-button-group button[type="submit"]:hover {
     background-color: #218838;
 }
 
-.button-group button[type="submit"]:disabled {
+.UpdateProfile-button-group button[type="submit"]:disabled {
     background-color: #6c757d;
     cursor: not-allowed;
 }
 
-.cancel-button {
+.UpdateProfile-cancel-button {
     background-color: #dc3545;
     color: white;
 }
 
-.cancel-button:hover {
+.UpdateProfile-cancel-button:hover {
     background-color: #c82333;
 }
 
-.error-message {
+.UpdateProfile-error-message {
     padding: 1rem;
     margin-bottom: 1rem;
     background-color: #f8d7da;
@@ -105,12 +105,12 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .update-profile-container {
+    .UpdateProfile-update-profile-container {
         margin: 1rem;
         padding: 1rem;
     }
 
-    .button-group {
+    .UpdateProfile-button-group {
         flex-direction: column;
     }
-} 
+}
