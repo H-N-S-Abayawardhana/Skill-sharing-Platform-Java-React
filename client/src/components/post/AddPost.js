@@ -73,7 +73,7 @@ export default function AddPost() {
 
         try {
             await axios.post('http://localhost:8080/api/posts', newPost);
-            navigate('/posts');
+            navigate('/PostsListrandomuser');
         } catch (error) {
             setError('Error creating post');
             console.error('Post creation error:', error);
