@@ -11,20 +11,21 @@ const OAuth2RedirectHandler = () => {
         
         if (userDataParam) {
             try {
-                // Parse user data from URI parameter
                 const userData = JSON.parse(decodeURIComponent(userDataParam));
                 
                 // Store user data in localStorage
-                localStorage.setItem('user', JSON.stringify(userData));
+                localStorage.setItem('user', JSON.stringify({
+                    ...userData,
+                    profileImage: userData.profileImage || "http://www.w3.org/2000/svg"
+                }));
                 
-                // Redirect to Profile page
                 navigate('/Profile');
             } catch (error) {
-                console.error('Failed to process OAuth redirect:', error);
-                navigate('/Login', { state: { error: 'OAuth authentication failed' } });
+                console.error('OAuth authentication failed:', error);
+                navigate('/Login', { state: { error: 'Authentication failed' } });
             }
         } else {
-            navigate('/Login', { state: { error: 'OAuth authentication failed' } });
+            navigate('/Login', { state: { error: 'Authentication failed' } });
         }
     }, [navigate, location]);
 
