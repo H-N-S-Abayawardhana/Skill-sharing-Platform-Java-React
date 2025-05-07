@@ -347,7 +347,7 @@ export default function Comments({ postId, userId }) {
                                                         }
                                                     >
                                                         <i className={`bi ${hasUserLiked(reply.likes) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
-                                                        {reply.likes?.length || 0}
+                                                        {reply.likes?.length || 0} Like
                                                     </button>
 
                                                     {reply.userId === userId && (
