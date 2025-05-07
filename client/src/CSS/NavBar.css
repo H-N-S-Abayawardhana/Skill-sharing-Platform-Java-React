@@ -147,6 +147,21 @@
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
 }
 
+.navbar-profile-image-container {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-profile-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+
 /* For mobile view */
 @media (max-width: 991.98px) {
   .navbar-collapse {

@@ -196,17 +196,17 @@ const Register = () => {
     };
 
     return (
-        <div className="register-page">
+        <div className="Register-register-page">
             <Navbar/>
             <motion.div 
-                className="register-container"
+                className="Register-register-container"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className="glass-card">
+                <div className="Register-glass-card">
                     <motion.h2 
-                        className="register-title"
+                        className="Register-register-title"
                         initial={{ y: -20 }}
                         animate={{ y: 0 }}
                         transition={{ type: "spring", stiffness: 300 }}
@@ -216,7 +216,7 @@ const Register = () => {
                     
                     {error && (
                         <motion.div 
-                            className="error-banner"
+                            className="Register-error-banner"
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3 }}
@@ -226,13 +226,13 @@ const Register = () => {
                     )}
                     
                     <form onSubmit={handleSubmit}>
-                        <div className="form-columns">
-                            <div className="form-column">
-                                <div className={`form-group ${errors.username ? 'invalid' : ''}`}>
+                        <div className="Register-form-columns">
+                            <div className="Register-form-column">
+                                <div className={`Register-form-group ${errors.username ? 'invalid' : ''}`}>
                                     <label>Username</label>
-                                    <div className="input-wrapper">
-                                        <div className="input-with-icon">
-                                            <FaUser className="input-icon" />
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-input-with-icon">
+                                           <div className="Register-input-icon"> <FaUser  /></div>
                                             <input
                                                 type="text"
                                                 name="username"
@@ -243,7 +243,7 @@ const Register = () => {
                                         </div>
                                         {errors.username && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -254,11 +254,11 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className={`form-group ${errors.email ? 'invalid' : ''}`}>
+                                <div className={`Register-form-group ${errors.email ? 'invalid' : ''}`}>
                                     <label>Email</label>
-                                    <div className="input-wrapper">
-                                        <div className="input-with-icon">
-                                            <FaEnvelope className="input-icon" />
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-input-with-icon">
+                                            <div className="Register-input-icon"> <FaEnvelope  /></div>
                                             <input
                                                 type="email"
                                                 name="email"
@@ -269,7 +269,7 @@ const Register = () => {
                                         </div>
                                         {errors.email && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -280,11 +280,12 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className={`form-group ${errors.password ? 'invalid' : ''}`}>
+                                <div className={`Register-form-group ${errors.password ? 'invalid' : ''}`}>
                                     <label>Password</label>
-                                    <div className="input-wrapper">
-                                        <div className="input-with-icon">
-                                            <FaLock className="input-icon" />
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-input-with-icon">
+                                            <div className="Register-input-icon"> <FaLock  /></div>
+                                            
                                             <input
                                                 type={showPassword ? "text" : "password"}
                                                 name="password"
@@ -293,33 +294,33 @@ const Register = () => {
                                                 placeholder="••••••••"
                                             />
                                             <div 
-                                                className="password-toggle"
+                                                className="Register-password-toggle"
                                                 onClick={() => setShowPassword(!showPassword)}
                                             >
                                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
                                             </div>
                                         </div>
                                         {formData.password && (
-                                            <div className="password-strength">
-                                                <div className="strength-bars">
+                                            <div className="Register-password-strength">
+                                                <div className="Register-strength-bars">
                                                     {[...Array(5)].map((_, index) => (
                                                         <div 
                                                             key={index}
-                                                            className={`strength-bar ${index < passwordStrength ? 'active' : ''}`}
+                                                            className={`Register-strength-bar ${index < passwordStrength ? 'active' : ''}`}
                                                             style={{
                                                                 backgroundColor: index < passwordStrength ? getPasswordStrengthColor() : ''
                                                             }}
                                                         ></div>
                                                     ))}
                                                 </div>
-                                                <span className="strength-label" style={{ color: getPasswordStrengthColor() }}>
+                                                <span className="Register-strength-label" style={{ color: getPasswordStrengthColor() }}>
                                                     {getPasswordStrengthLabel()}
                                                 </span>
                                             </div>
                                         )}
                                         {errors.password && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -331,12 +332,13 @@ const Register = () => {
                                 </div>
                             </div>
 
-                            <div className="form-column">
-                                <div className={`form-group ${errors.firstName ? 'invalid' : ''}`}>
+                            <div className="Register-form-column">
+                                <div className={`Register-form-group ${errors.firstName ? 'invalid' : ''}`}>
                                     <label>First Name</label>
-                                    <div className="input-wrapper">
-                                        <div className="input-with-icon">
-                                            <FaUserEdit className="input-icon" />
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-input-with-icon">
+                                            <div className="Register-input-icon"> <FaUserEdit  /></div>
+                                            
                                             <input
                                                 type="text"
                                                 name="firstName"
@@ -347,7 +349,7 @@ const Register = () => {
                                         </div>
                                         {errors.firstName && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -358,11 +360,12 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className={`form-group ${errors.lastName ? 'invalid' : ''}`}>
+                                <div className={`Register-form-group ${errors.lastName ? 'invalid' : ''}`}>
                                     <label>Last Name</label>
-                                    <div className="input-wrapper">
-                                        <div className="input-with-icon">
-                                            <FaUserEdit className="input-icon" />
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-input-with-icon">
+                                            <div className="Register-input-icon"> <FaUserEdit  /></div>
+                                            
                                             <input
                                                 type="text"
                                                 name="lastName"
@@ -373,7 +376,7 @@ const Register = () => {
                                         </div>
                                         {errors.lastName && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -385,10 +388,10 @@ const Register = () => {
                                     </div>
                                 </div>
 
-                                <div className={`form-group ${errors.bio ? 'invalid' : ''}`}>
+                                <div className={`Register-form-group ${errors.bio ? 'invalid' : ''}`}>
                                     <label>Bio</label>
-                                    <div className="input-wrapper">
-                                        <div className="textarea-with-icon">
+                                    <div className="Register-input-wrapper">
+                                        <div className="Register-textarea-with-icon">
                                             <textarea
                                                 name="bio"
                                                 value={formData.bio}
@@ -398,7 +401,7 @@ const Register = () => {
                                         </div>
                                         {errors.bio && (
                                             <motion.div 
-                                                className="error-message"
+                                                className="Register-error-message"
                                                 initial={{ opacity: 0, x: -10 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{ duration: 0.2 }}
@@ -411,11 +414,11 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div className={`form-group profile-upload ${errors.profileImage ? 'invalid' : ''}`}>
+                        <div className={`Register-form-group Register-profile-upload ${errors.profileImage ? 'invalid' : ''}`}>
                             <label>Profile Picture</label>
-                            <div className="profile-image-container">
+                            <div className="Register-profile-image-container">
                                 <motion.div 
-                                    className="image-preview-container"
+                                    className="Register-image-preview-container"
                                     whileHover={{ scale: previewImage ? 1.05 : 1 }}
                                     transition={{ duration: 0.2 }}
                                 >
@@ -423,26 +426,26 @@ const Register = () => {
                                         <img 
                                             src={previewImage} 
                                             alt="Profile Preview" 
-                                            className="profile-preview" 
+                                            className="Register-profile-preview" 
                                         />
                                     ) : (
-                                        <div className="profile-placeholder">
+                                        <div className="Register-profile-placeholder">
                                             <FaUser />
                                         </div>
                                     )}
                                 </motion.div>
-                                <div className="file-input-wrapper">
+                                <div className="Register-file-input-wrapper">
                                     <input
                                         type="file"
                                         name="profileImage"
                                         id="profileImage"
                                         accept="image/*"
                                         onChange={handleImageChange}
-                                        className="file-input"
+                                        className="Register-file-input"
                                     />
                                     <motion.label 
                                         htmlFor="profileImage" 
-                                        className="file-input-label"
+                                        className="Register-file-input-label"
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
                                     >
@@ -452,7 +455,7 @@ const Register = () => {
                             </div>
                             {errors.profileImage && (
                                 <motion.div 
-                                    className="error-message"
+                                    className="Register-error-message"
                                     initial={{ opacity: 0, y: -10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.2 }}
@@ -464,53 +467,53 @@ const Register = () => {
                         
                         <motion.button 
                             type="submit" 
-                            className="register-btn" 
+                            className="Register-register-btn" 
                             disabled={isSubmitting}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ duration: 0.2 }}
                         >
                             {isSubmitting ? (
-                                <div className="spinner-container">
-                                    <div className="spinner"></div>
+                                <div className="Register-spinner-container">
+                                    <div className="Register-spinner"></div>
                                     <span>Creating Account...</span>
                                 </div>
                             ) : 'Create Account'}
                         </motion.button>
                     </form>
 
-                    <div className="divider">
+                    <div className="Register-divider">
                         <span>or continue with</span>
                     </div>
 
-                    <div className="social-signup-buttons">
+                    <div className="Register-social-signup-buttons">
                         <motion.button 
                             onClick={handleGoogleSignUp} 
-                            className="social-btn google-signup-btn"
+                            className="Register-social-btn Register-google-signup-btn"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <FaGoogle className="social-icon" />
+                            <FaGoogle className="Register-social-icon" />
                             <span>Google</span>
                         </motion.button>
                         <motion.button 
                             onClick={handleFacebookSignUp} 
-                            className="social-btn facebook-signup-btn"
+                            className="Register-social-btn Register-facebook-signup-btn"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             transition={{ duration: 0.2 }}
                         >
-                            <FaFacebook className="social-icon" />
+                            <FaFacebook className="Register-social-icon" />
                             <span>Facebook</span>
                         </motion.button>
                     </div>
 
-                    <p className="login-text">
+                    <p className="Register-login-text">
                         Already have an account?{' '}
                         <motion.span 
                             onClick={() => navigate('/Login')} 
-                            className="link"
+                            className="Register-link"
                             whileHover={{ scale: 1.05 }}
                             transition={{ duration: 0.2 }}
                         >

@@ -48,6 +48,14 @@ const NavBar = () => {
     return () => document.removeEventListener('click', closeDropdowns);
   }, []);
 
+  useEffect(() => {
+    // Fetch user data from localStorage or authService if needed
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      setUser(storedUser);
+    }
+  }, []);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
       <div className="container">
@@ -122,6 +130,20 @@ const NavBar = () => {
                 >
                   Sign Up
                 </button>
+                {/* Profile image displayed to the right of Sign Up button */}
+                {user && user.profilePicture && (
+                  <div className="navbar-profile-image-container">
+                    <img
+                      src={user.profilePicture || '/ProfailIcon.jpg'}
+                      alt={user.username}
+                      className="navbar-profile-image"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = '/ProfailIcon.jpg';
+                      }}
+                    />
+                  </div>
+                )}
               </>
             ) : (
               <div className="user-navbar-user-section">
@@ -129,9 +151,21 @@ const NavBar = () => {
                   <div className="user-navbar-profile" onClick={(e) => e.stopPropagation()}>
                     <div className="user-navbar-user">
                       <div className="user-navbar-profile-icon" onClick={toggleProfileDropdown}>
-                        <div className="user-navbar-avatar-placeholder">
-                          <User size={20} />
-                        </div>
+                        {user.profilePicture ? (
+                          <img
+                            src={user.profilePicture}
+                            alt={user.username}
+                            className="navbar-profile-image"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = '/ProfailIcon.jpg';
+                            }}
+                          />
+                        ) : (
+                          <div className="user-navbar-avatar-placeholder">
+                            <User size={20} />
+                          </div>
+                        )}
                       </div>
                       {isProfileDropdownOpen && (
                         <div className="user-navbar-dropdown">
