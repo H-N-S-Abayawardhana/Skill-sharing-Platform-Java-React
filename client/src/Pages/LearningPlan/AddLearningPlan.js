@@ -17,7 +17,7 @@ export default function AddLearningPlan() {
     resources: [],
     progressPercentage: 0,
     status: 'NOT_STARTED',
-    userId: 1  // Assuming a default user ID for simplicity
+    userId: 1 
   });
   
   const [newTopic, setNewTopic] = useState('');

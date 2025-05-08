@@ -57,7 +57,7 @@ const NavBar = () => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-custom sticky-top">
+    <nav className="navbar navbar-expand-lg user-navbar-custom sticky-top">
       <div className="container">
         <div className="navbar-brand">
           <Link to="/" className="brand-link">
@@ -66,7 +66,7 @@ const NavBar = () => {
         </div>
         
         <button 
-          className="navbar-toggler" 
+          className="navbar-toggler user-navbar-toggler" 
           type="button" 
           data-bs-toggle="collapse" 
           data-bs-target="#navbarContent" 
@@ -75,42 +75,42 @@ const NavBar = () => {
           aria-label="Toggle navigation"
           onClick={handleNavCollapse}
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon user-navbar-toggler-icon"></span>
         </button>
         
-        <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse`} id="navbarContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">Home</a>
+        <div className={`${isNavCollapsed ? 'collapse' : ''} navbar-collapse user-navbar-collapse`} id="navbarContent">
+          <ul className="navbar-nav user-navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item user-navbar-item">
+              <a className="nav-link user-navbar-link active" aria-current="page" href="/">Home</a>
             </li>
             
-            <li className="nav-item dropdown navbar-dropdown">
+            <li className="nav-item dropdown user-navbar-dropdown">
               <a 
-                className="nav-link dropdown-toggle" 
+                className="nav-link dropdown-toggle user-navbar-dropdown-toggle" 
                 href="#" 
                 id="learningDropdown" 
                 role="button"
               >
                 Learning Plans
               </a>
-              <ul className="dropdown-menu" aria-labelledby="learningDropdown">
-                <li><a className="dropdown-item" href="/learning-plan/add">Add Learning Plan</a></li>
-                <li><a className="dropdown-item" href="/view-learning-plans">View Learning Plans</a></li>
+              <ul className="dropdown-menu user-navbar-dropdown-menu" aria-labelledby="learningDropdown">
+                <li><a className="dropdown-item user-navbar-dropdown-item" href="/learning-plan/add">Add Learning Plan</a></li>
+                <li><a className="dropdown-item user-navbar-dropdown-item" href="/view-learning-plans">View Learning Plans</a></li>
               </ul>
             </li>
             
-            <li className="nav-item dropdown navbar-dropdown">
+            <li className="nav-item dropdown user-navbar-dropdown">
               <a 
-                className="nav-link dropdown-toggle" 
+                className="nav-link dropdown-toggle user-navbar-dropdown-toggle" 
                 href="#" 
                 id="postsDropdown" 
                 role="button"
               >
                 Posts
               </a>
-              <ul className="dropdown-menu" aria-labelledby="postsDropdown">
-                <li><a className="dropdown-item" href="/add-post">Add Posts</a></li>
-                <li><a className="dropdown-item" href="/PostsListrandomuser">View Posts</a></li>
+              <ul className="dropdown-menu user-navbar-dropdown-menu" aria-labelledby="postsDropdown">
+                <li><a className="dropdown-item user-navbar-dropdown-item" href="/add-post">Add Posts</a></li>
+                <li><a className="dropdown-item user-navbar-dropdown-item" href="/PostsListrandomuser">View Posts</a></li>
               </ul>
             </li>
           </ul>
@@ -203,7 +203,7 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-    </nav>
+    </nav> 
   );
 };
 
