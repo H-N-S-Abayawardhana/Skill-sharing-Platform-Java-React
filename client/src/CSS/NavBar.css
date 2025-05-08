@@ -8,51 +8,51 @@
   --text-color: #212121; /* Dark Slate */
 }
 
-.navbar-custom {
+.user-navbar-custom {
   background-color: var(--primary-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 0.8rem 1rem;
 }
 
-.navbar-custom .navbar-brand {
+.user-navbar-custom .user-navbar-brand {
   color: white;
   font-weight: 600;
   font-size: 1.5rem;
   letter-spacing: 0.5px;
 }
 
-.navbar-custom .navbar-nav .nav-link {
+.user-navbar-custom .user-navbar-nav .user-navbar-link {
   color: rgba(255, 255, 255, 0.85);
   font-weight: 500;
   padding: 0.5rem 1rem;
   transition: all 0.2s ease;
 }
 
-.navbar-custom .navbar-nav .nav-link:hover {
+.user-navbar-custom .user-navbar-nav .user-navbar-link:hover {
   color: white;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 4px;
 }
 
-.navbar-custom .navbar-nav .active > .nav-link,
-.navbar-custom .navbar-nav .nav-link.active {
+.user-navbar-custom .user-navbar-nav .active > .user-navbar-link,
+.user-navbar-custom .user-navbar-nav .user-navbar-link.active {
   color: white;
   font-weight: 600;
 }
 
 /* Dropdown hover functionality */
-.navbar-dropdown {
+.user-navbar-dropdown {
   position: relative;
 }
 
-.navbar-dropdown:hover .dropdown-menu {
+.user-navbar-dropdown:hover .user-navbar-dropdown-menu {
   display: block;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-.navbar-custom .dropdown-menu {
+.user-navbar-custom .user-navbar-dropdown-menu {
   display: block;
   opacity: 0;
   visibility: hidden;
@@ -66,23 +66,23 @@
   margin-top: 0.5rem;
 }
 
-.navbar-custom .dropdown-item {
+.user-navbar-custom .user-navbar-dropdown-item {
   color: var(--text-color);
   padding: 0.6rem 1.2rem;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
-.navbar-custom .dropdown-item:hover {
+.user-navbar-custom .user-navbar-dropdown-item:hover {
   background-color: rgba(63, 81, 181, 0.1);
   color: var(--primary-color);
 }
 
-.navbar-toggler {
+.user-navbar-toggler {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-.navbar-toggler-icon {
+.user-navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
@@ -100,13 +100,13 @@
   font-size: 0.9rem;
 }
 
-.btn-accent {
+.user-navbar-btn-accent {
   background-color: var(--accent-color);
   color: white;
   border: none;
 }
 
-.btn-accent:hover {
+.user-navbar-btn-accent:hover {
   background-color: #00ACC1; /* Slightly darker shade of the accent color */
   transform: translateY(-1px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -128,7 +128,7 @@
   align-items: center;
 }
 
-.profile-icon {
+.user-navbar-profile-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -141,7 +141,7 @@
   transition: all 0.2s ease;
 }
 
-.profile-icon:hover {
+.user-navbar-profile-icon:hover {
   transform: scale(1.05);
   background-color: var(--accent-color);
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
@@ -164,7 +164,7 @@
 
 /* For mobile view */
 @media (max-width: 991.98px) {
-  .navbar-collapse {
+  .user-navbar-collapse {
     background-color: var(--primary-color);
     padding: 1rem;
     border-radius: 0 0 10px 10px;
@@ -180,36 +180,36 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  .navbar-custom .navbar-nav .nav-link {
+  .user-navbar-custom .user-navbar-nav .user-navbar-link {
     padding: 0.8rem 1rem;
   }
   
   /* Adjust dropdown behavior for mobile */
-  .navbar-dropdown:hover .dropdown-menu {
+  .user-navbar-dropdown:hover .user-navbar-dropdown-menu {
     display: none;
     opacity: 0;
     visibility: hidden;
   }
   
-  .navbar-dropdown.show .dropdown-menu {
+  .user-navbar-dropdown.show .user-navbar-dropdown-menu {
     display: block;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
   }
   
-  .navbar-custom .dropdown-menu {
+  .user-navbar-custom .user-navbar-dropdown-menu {
     background-color: rgba(255, 255, 255, 0.05);
     box-shadow: none;
     border-radius: 4px;
     margin-left: 1rem;
   }
   
-  .navbar-custom .dropdown-item {
+  .user-navbar-custom .user-navbar-dropdown-item {
     color: rgba(255, 255, 255, 0.85);
   }
   
-  .navbar-custom .dropdown-item:hover {
+  .user-navbar-custom .user-navbar-dropdown-item:hover {
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
   }
