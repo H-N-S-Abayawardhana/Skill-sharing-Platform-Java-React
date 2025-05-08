@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/PostList.css';
-import Comments from '../comment/Comments'; // Import the Comments component
+import Comments from '../comment/Comments'; 
+import NavBar from '../../components/NavBar';
 
 export default function PostsListS() {
     const [posts, setPosts] = useState([]);
@@ -14,7 +15,7 @@ export default function PostsListS() {
     
     useEffect(() => {
         loadPosts();
-        // Here you would also fetch the current user's ID from your auth system
+        
     }, []);
     
     const loadPosts = async () => {
@@ -114,6 +115,8 @@ export default function PostsListS() {
     };
 
     return (
+        <>
+            <NavBar />
         <div className="postlist-container">
             <div className="posts-wrapper">
                 <div className="postlist-header">
@@ -196,7 +199,7 @@ export default function PostsListS() {
                             </div>
                             
                             {/* Post Actions */}
-                            <div className="post-actions">
+                            {/* <div className="post-actions">
                                 <button 
                                     className={`post-action-btn ${hasUserLikedPost(post) ? 'liked' : ''}`}
                                     onClick={() => handleLikePost(post.id)}
@@ -210,7 +213,7 @@ export default function PostsListS() {
                                 <button className="post-action-btn">
                                     <i className="bi bi-share"></i> Share
                                 </button>
-                            </div>
+                            </div> */}
                             
                             {/* Comments section */}
                             {activeCommentPostId === post.id && (
@@ -244,5 +247,6 @@ export default function PostsListS() {
                 )}
             </div>
         </div>
+        </>
     );
 }

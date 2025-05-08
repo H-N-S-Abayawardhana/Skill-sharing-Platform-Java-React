@@ -212,7 +212,7 @@ export default function PostsList() {
                                 )}
                                 
                                 {/* Admin buttons */}
-                                <div className="post-buttons">
+                                {/* <div className="post-buttons">
                                     <Link to={`/view-post/${post.id}`} className="post-btn post-btn-view">
                                         <i className="bi bi-eye"></i> View
                                     </Link>
@@ -226,7 +226,7 @@ export default function PostsList() {
                                             </button>
                                         </>
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                         ))
                     )}
