@@ -100,6 +100,17 @@ export default function PostsList() {
         return post.likes && post.likes.includes(currentUserId);
     };
 
+    // Function to determine media grid class based on number of photos
+    const getMediaGridClass = (mediaUrls) => {
+        if (!mediaUrls || mediaUrls.length === 0) return '';
+        
+        if (mediaUrls.length === 1) return 'single-photo';
+        if (mediaUrls.length === 2) return 'two-photos';
+        if (mediaUrls.length === 3) return 'three-photos';
+        if (mediaUrls.length === 4) return 'four-photos';
+        return 'many-photos';
+    };
+
     return (
         <>
             <NavBar />
@@ -152,17 +163,38 @@ export default function PostsList() {
                                         : post.content}
                                     </p>
                                     
-                                    {/* Display media if available */}
+                                    {/* Display media with Facebook-style grid */}
                                     {post.mediaUrls && post.mediaUrls.length > 0 && (
-                                        <div className="post-media">
-                                            {post.mediaUrls.map((url, index) => (
-                                                <img 
-                                                    key={index} 
-                                                    src={url} 
-                                                    alt={`Post media ${index + 1}`} 
-                                                    className="post-media-item" 
-                                                />
-                                            ))}
+                                        <div className={`post-media ${getMediaGridClass(post.mediaUrls)}`}>
+                                            {post.mediaUrls.length === 3 ? (
+                                                // Special handling for exactly 3 photos
+                                                <>
+                                                    {post.mediaUrls.map((url, index) => (
+                                                        <img 
+                                                            key={index}
+                                                            src={url} 
+                                                            alt={`Post media ${index + 1}`} 
+                                                            className="post-media-item" 
+                                                        />
+                                                    ))}
+                                                </>
+                                            ) : (
+                                                // Default handling for 1, 2, 4 or more photos
+                                                post.mediaUrls.slice(0, 4).map((url, index) => (
+                                                    <div key={index} className={post.mediaUrls.length > 4 && index === 3 ? "photo-counter-container" : ""}>
+                                                        <img 
+                                                            src={url} 
+                                                            alt={`Post media ${index + 1}`} 
+                                                            className="post-media-item" 
+                                                        />
+                                                        {post.mediaUrls.length > 4 && index === 3 && (
+                                                            <div className="photo-counter">
+                                                                +{post.mediaUrls.length - 4}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                ))
+                                            )}
                                         </div>
                                     )}
                                 </div>
@@ -210,23 +242,6 @@ export default function PostsList() {
                                         />
                                     </div>
                                 )}
-                                
-                                {/* Admin buttons */}
-                                {/* <div className="post-buttons">
-                                    <Link to={`/view-post/${post.id}`} className="post-btn post-btn-view">
-                                        <i className="bi bi-eye"></i> View
-                                    </Link>
-                                    {post.userId === currentUserId && (
-                                        <>
-                                            <Link to={`/edit-post/${post.id}`} className="post-btn post-btn-edit">
-                                                <i className="bi bi-pencil"></i> Edit
-                                            </Link>
-                                            <button className="post-btn post-btn-delete" onClick={() => deletePost(post.id)}>
-                                                <i className="bi bi-trash"></i> Delete
-                                            </button>
-                                        </>
-                                    )}
-                                </div> */}
                             </div>
                         ))
                     )}
