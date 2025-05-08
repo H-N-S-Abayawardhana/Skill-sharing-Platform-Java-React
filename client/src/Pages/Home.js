@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import '../css/Homepage.css';
 import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 export default function Home() {
   // States for data
@@ -522,6 +523,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

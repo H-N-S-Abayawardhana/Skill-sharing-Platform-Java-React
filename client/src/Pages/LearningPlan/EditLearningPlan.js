@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import '../../css/EditLearningPlan.css';
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 
 export default function EditLearningPlan() {
   const { id } = useParams();
@@ -141,6 +142,8 @@ export default function EditLearningPlan() {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="Edit-Learning-Plan-container">
       <div className="container">
         <div className="row">
@@ -327,5 +330,7 @@ export default function EditLearningPlan() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

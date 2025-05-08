@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import '../../css/ViewLearningPlan.css';
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 
 export default function Home() {
   const [learningPlans, setLearningPlans] = useState([]);
@@ -216,6 +217,7 @@ export default function Home() {
           </div>
         )}
       </div>
+      <Footer/>
     </>
   );
 }
