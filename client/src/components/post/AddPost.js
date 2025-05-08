@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/AddPost.css';
+import NavBar from '../../components/NavBar';
 
 export default function AddPost() {
     const [title, setTitle] = useState('');
@@ -15,18 +16,33 @@ export default function AddPost() {
     const navigate = useNavigate();
     const userId = 1; // Hardcoded for demo
 
+    // Handle file change and ensure only up to 3 files and valid file types are selected
     const handleFileChange = (e) => {
         const selectedFiles = Array.from(e.target.files);
-
+        
         if (selectedFiles.length > 3) {
             setError('Maximum 3 files allowed');
             return;
+        }
+
+        // Validate file types and sizes
+        const validTypes = ['image/jpeg', 'image/png', 'video/mp4'];
+        for (let file of selectedFiles) {
+            if (!validTypes.includes(file.type)) {
+                setError('Invalid file type. Only JPG, PNG, and MP4 are allowed.');
+                return;
+            }
+            if (file.size > 10 * 1024 * 1024) { // 10MB size limit
+                setError('Each file must be less than 10MB.');
+                return;
+            }
         }
 
         setFiles(selectedFiles);
         setError('');
     };
 
+    // Upload files to the server
     const uploadFiles = async () => {
         if (files.length === 0) return [];
 
@@ -51,6 +67,7 @@ export default function AddPost() {
         }
     };
 
+    // Handle form submission to create a post
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -80,10 +97,12 @@ export default function AddPost() {
         }
     };
 
+   
     const renderPreview = () => {
         if (files.length === 0) return null;
 
         return (
+            
             <div className="add-post-preview">
                 <h5>Preview:</h5>
                 <div className="add-post-preview-images">
@@ -169,7 +188,7 @@ export default function AddPost() {
                             multiple
                             accept="image/*, video/*"
                         />
-                        <small>You can upload up to 3 images or videos.</small>
+                        <small>You can upload up to 3 images or videos (Max 10MB each).</small>
                     </div>
 
                     {renderPreview()}
@@ -182,7 +201,7 @@ export default function AddPost() {
                         >
                             {uploading ? 'Uploading...' : 'Submit'}
                         </button>
-                        <Link to="/posts" className="add-post-cancel-btn">Cancel</Link>
+                        <Link to="/PostsListrandomuser" className="add-post-cancel-btn">Cancel</Link>
                     </div>
                 </form>
             </div>
