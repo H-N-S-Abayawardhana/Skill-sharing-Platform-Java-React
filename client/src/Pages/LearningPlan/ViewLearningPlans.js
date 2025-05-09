@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
+import Swal from 'sweetalert2';
 import '../../css/ViewLearningPlan.css';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -32,14 +33,70 @@ export default function Home() {
     }
   };
 
-  const deleteLearningPlan = async (id) => {
-    if (window.confirm("Are you sure you want to delete this learning plan?")) {
-      try {
-        await axios.delete(`http://localhost:8080/api/learning-plan/${id}`);
-        loadLearningPlans(); 
-      } catch (error) {
-        console.error("Error deleting learning plan:", error);
+  const confirmDeleteLearningPlan = (id, title) => {
+    Swal.fire({
+      title: 'Delete Learning Plan?',
+      html: `Are you sure you want to delete <strong>${title}</strong>?<br>This action cannot be undone.`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: 'var(--danger-color)',
+      cancelButtonColor: 'var(--text-secondary)',
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel',
+      background: 'var(--card-background)',
+      color: 'var(--text-color)',
+      borderRadius: 'var(--border-radius)',
+      focusConfirm: false,
+      reverseButtons: true,
+      customClass: {
+        container: 'user-viewlearningplans-swal-container',
+        popup: 'user-viewlearningplans-swal-popup',
+        title: 'user-viewlearningplans-swal-title',
+        htmlContainer: 'user-viewlearningplans-swal-content',
+        confirmButton: 'user-viewlearningplans-swal-confirm',
+        cancelButton: 'user-viewlearningplans-swal-cancel'
       }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteLearningPlan(id);
+      }
+    });
+  };
+
+  const deleteLearningPlan = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/learning-plan/${id}`);
+      
+      Swal.fire({
+        title: 'Deleted!',
+        text: 'Learning plan has been deleted successfully.',
+        icon: 'success',
+        confirmButtonColor: 'var(--primary-color)',
+        background: 'var(--card-background)',
+        color: 'var(--text-color)',
+        timer: 2000,
+        timerProgressBar: true,
+        customClass: {
+          popup: 'user-viewlearningplans-swal-popup',
+          title: 'user-viewlearningplans-swal-title'
+        }
+      });
+      
+      loadLearningPlans();
+    } catch (error) {
+      console.error("Error deleting learning plan:", error);
+      Swal.fire({
+        title: 'Error',
+        text: 'Failed to delete the learning plan. Please try again.',
+        icon: 'error',
+        confirmButtonColor: 'var(--primary-color)',
+        background: 'var(--card-background)',
+        color: 'var(--text-color)',
+        customClass: {
+          popup: 'user-viewlearningplans-swal-popup',
+          title: 'user-viewlearningplans-swal-title'
+        }
+      });
     }
   };
 
@@ -185,7 +242,7 @@ export default function Home() {
             <i className="user-viewlearningplans-icon">✏️</i>
           </Link>
           <button 
-            onClick={() => deleteLearningPlan(plan.id)} 
+            onClick={() => confirmDeleteLearningPlan(plan.id, plan.title)} 
             className="user-viewlearningplans-btn user-viewlearningplans-btn-delete"
             aria-label="Delete plan"
           >
@@ -230,7 +287,7 @@ export default function Home() {
           <i className="user-viewlearningplans-icon">✏️</i>
         </Link>
         <button 
-          onClick={() => deleteLearningPlan(plan.id)} 
+          onClick={() => confirmDeleteLearningPlan(plan.id, plan.title)} 
           className="user-viewlearningplans-btn user-viewlearningplans-btn-delete"
           aria-label="Delete plan"
         >
