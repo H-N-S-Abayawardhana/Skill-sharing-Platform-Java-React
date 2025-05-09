@@ -6,8 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import Backend.model.CommentModel;
+import Backend.model.PostModel;
 import Backend.repository.CommentRepository;
 import Backend.repository.PostRepository;
+import Backend.service.NotificationService;
 import Backend.exception.PostNotFoundException;
 import Backend.exception.CommentNotFoundException;
 import Backend.exception.UnauthorizedAccessException;
@@ -25,17 +27,29 @@ public class CommentController {
     
     @Autowired
     private PostRepository postRepository;
+    
+    @Autowired
+    private NotificationService notificationService;
 
     // CREATE - Add a new comment to a post
     @PostMapping("/posts/{postId}/comments")
     public CommentModel createComment(@PathVariable Long postId, @RequestBody CommentModel newComment) {
         // Verify post exists
-        if (!postRepository.existsById(postId)) {
-            throw new PostNotFoundException(postId);
-        }
+        PostModel post = postRepository.findById(postId)
+            .orElseThrow(() -> new PostNotFoundException(postId));
         
         newComment.setPostId(postId);
-        return commentRepository.save(newComment);
+        CommentModel savedComment = commentRepository.save(newComment);
+        
+        // Create notification for post owner
+        notificationService.createCommentNotification(
+            post.getUserId(), 
+            newComment.getUserId(), 
+            postId, 
+            savedComment.getId()
+        );
+        
+        return savedComment;
     }
 
     // CREATE - Add a reply to a comment
@@ -47,7 +61,17 @@ public class CommentController {
         
         reply.setPostId(parentComment.getPostId());
         reply.setParentCommentId(commentId);
-        return commentRepository.save(reply);
+        CommentModel savedReply = commentRepository.save(reply);
+        
+        // Create notification for comment owner
+        notificationService.createReplyNotification(
+            parentComment.getUserId(),
+            reply.getUserId(),
+            commentId,
+            savedReply.getId()
+        );
+        
+        return savedReply;
     }
 
     // READ - Get all comments for a post
@@ -142,16 +166,23 @@ public class CommentController {
     // LIKE - Add a like to a comment
     @PutMapping("/comments/{id}/like/{userId}")
     public CommentModel likeComment(@PathVariable Long id, @PathVariable Long userId) {
-        return commentRepository.findById(id)
-                .map(comment -> {
-                    List<Long> likes = comment.getLikes();
-                    if (!likes.contains(userId)) {
-                        likes.add(userId);
-                        comment.setLikes(likes);
-                    }
-                    return commentRepository.save(comment);
-                })
+        CommentModel comment = commentRepository.findById(id)
                 .orElseThrow(() -> new CommentNotFoundException(id));
+                
+        List<Long> likes = comment.getLikes();
+        if (!likes.contains(userId)) {
+            likes.add(userId);
+            comment.setLikes(likes);
+            
+            // Create notification for comment owner
+            notificationService.createCommentLikeNotification(
+                comment.getUserId(),
+                userId,
+                id
+            );
+        }
+        
+        return commentRepository.save(comment);
     }
 
     // UNLIKE - Remove a like from a comment
