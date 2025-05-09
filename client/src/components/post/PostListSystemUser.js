@@ -165,7 +165,7 @@ export default function PostsListS() {
                                         <span>{getInitial(post.title)}</span>
                                     </div>
                                     <div className="post-author">
-                                        <p className="post-author-name">User {post.userId}</p>
+                                        <p className="post-author-name">{post.username || `User ${post.userId}`}</p>
                                         <p className="post-timestamp">{formatDate(post.createdAt)}</p>
                                     </div>
                                 </div>
