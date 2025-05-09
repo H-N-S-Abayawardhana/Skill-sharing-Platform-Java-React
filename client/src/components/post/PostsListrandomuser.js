@@ -4,18 +4,18 @@ import axios from 'axios';
 import '../../css/PostList.css';
 import Comments from '../comment/Comments'; 
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer'; // Import Footer component
 
 export default function PostsList() {
     const [posts, setPosts] = useState([]);
     const [activeCommentPostId, setActiveCommentPostId] = useState(null);
-    const [currentUserId, setCurrentUserId] = useState(1); // This should come from your auth context
+    const [currentUserId, setCurrentUserId] = useState(1); 
     const [commentCounts, setCommentCounts] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
     useEffect(() => {
         loadPosts();
-        
     }, []);
     
     const loadPosts = async () => {
@@ -26,7 +26,6 @@ export default function PostsList() {
             console.log("Posts fetched:", result.data);
             setPosts(result.data);
             
-            // Fetch comment counts for each post
             const counts = {};
             for (const post of result.data) {
                 const commentsResult = await axios.get(`http://localhost:8080/api/posts/${post.id}/comments`);
@@ -51,21 +50,18 @@ export default function PostsList() {
         }
     };
 
-    // Toggle comments visibility for a post
     const toggleComments = (postId) => {
         if (activeCommentPostId === postId) {
-            setActiveCommentPostId(null); // Close comments if already open
+            setActiveCommentPostId(null);
         } else {
-            setActiveCommentPostId(postId); // Open comments for this post
+            setActiveCommentPostId(postId);
         }
     };
 
-    // Get initial letter for avatar placeholder
     const getInitial = (username) => {
         return username ? username.charAt(0).toUpperCase() : "U";
     };
 
-    // Format timestamp
     const formatDate = (timestamp) => {
         if (!timestamp) return "Just now";
         const date = new Date(timestamp);
@@ -76,16 +72,12 @@ export default function PostsList() {
         });
     };
 
-    // Handle like/unlike post
     const handleLikePost = async (postId) => {
         try {
-            // Check if user already liked the post
             const post = posts.find(p => p.id === postId);
             if (post && post.likes && post.likes.includes(currentUserId)) {
-                // Unlike
                 await axios.put(`http://localhost:8080/api/posts/${postId}/unlike/${currentUserId}`);
             } else {
-                // Like
                 await axios.put(`http://localhost:8080/api/posts/${postId}/like/${currentUserId}`);
             }
             loadPosts();
@@ -95,12 +87,10 @@ export default function PostsList() {
         }
     };
 
-    // Check if the current user has liked a post
     const hasUserLikedPost = (post) => {
         return post.likes && post.likes.includes(currentUserId);
     };
 
-    // Function to determine media grid class based on number of photos
     const getMediaGridClass = (mediaUrls) => {
         if (!mediaUrls || mediaUrls.length === 0) return '';
         
@@ -164,12 +154,11 @@ export default function PostsList() {
                                         ? post.content.substring(0, 250) + '...' 
                                         : post.content}
                                     </p>
-                                    
+                                  
                                     {/* Display media with Facebook-style grid */}
                                     {post.mediaUrls && post.mediaUrls.length > 0 && (
                                         <div className={`post-media ${getMediaGridClass(post.mediaUrls)}`}>
                                             {post.mediaUrls.length === 3 ? (
-                                                // Special handling for exactly 3 photos
                                                 <>
                                                     {post.mediaUrls.map((url, index) => (
                                                         <img 
@@ -181,7 +170,6 @@ export default function PostsList() {
                                                     ))}
                                                 </>
                                             ) : (
-                                                // Default handling for 1, 2, 4 or more photos
                                                 post.mediaUrls.slice(0, 4).map((url, index) => (
                                                     <div key={index} className={post.mediaUrls.length > 4 && index === 3 ? "photo-counter-container" : ""}>
                                                         <img 
@@ -249,6 +237,8 @@ export default function PostsList() {
                     )}
                 </div>
             </div>
+            
+            <Footer />  {/* Add Footer here */}
         </>
     );
 }

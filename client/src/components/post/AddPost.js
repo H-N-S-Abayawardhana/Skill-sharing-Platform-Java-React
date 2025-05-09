@@ -5,6 +5,8 @@ import axios from 'axios';
 import '../../css/AddPost.css';
 import NavBar from '../../components/NavBar';
 
+import Footer from '../../components/Footer'; 
+
 export default function AddPost() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -227,6 +229,7 @@ export default function AddPost() {
                     </form>
                 </div>
             </div>
+              <Footer /> 
         </>
     );
 }
