@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Router } from "react-router-dom";
 import Home from './Pages/Home';
 import AddLearningPlan from './Pages/LearningPlan/AddLearningPlan';
 import Login from './Pages/Login';
@@ -16,12 +16,17 @@ import EditPost from './components/post/EditPost';
 import ViewPost from './components/post/ViewPost';
 import PostsListS from './components/post/PostListSystemUser';
 import { NotificationProvider } from './context/NotificationContext';
+import { SessionProvider } from './context/SessionContext';
+
+import SchedulePage from './Pages/SchedulePage';
+import JoinPage from './Pages/JoinPage';
+import SessionsOverviewPage from './Pages/SessionsOverviewPage';
 
 function App() {
   return (
     <NotificationProvider>
       <div>
-
+   
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/view-learning-plans" element={<ViewLearningPlans />} />
@@ -39,7 +44,14 @@ function App() {
           <Route path="/edit-post/:id" element={<EditPost />} />
           <Route path="/view-post/:id" element={<ViewPost />} />
           <Route path="/PostListSystemUser" element={<PostsListS />} />
-        </Routes>
+
+          <Route path="/sessions" element={<SessionsOverviewPage />} />
+          <Route path="/schedule" element={<SchedulePage />} />
+          <Route path="/join/:roomName" element={<JoinPage />} />          
+          <Route path="/join/:sessionId" element={<JoinPage />} />
+          <Route path="/join" element={<JoinPage />} />        
+          </Routes>
+       
 
 
       </div>
