@@ -234,19 +234,17 @@ export default function Home() {
       )}
       
       <div className="user-viewlearningplans-card-actions">
-        <Link to={`/view-learning-plan/${plan.id}`} className="user-viewlearningplans-btn user-viewlearningplans-btn-view">
-          <i className="user-viewlearningplans-icon">👁️</i> View Details
-        </Link>
+
         <div className="user-viewlearningplans-btn-group">
           <Link to={`/edit-learning-plan/${plan.id}`} className="user-viewlearningplans-btn user-viewlearningplans-btn-edit">
-            <i className="user-viewlearningplans-icon">✏️</i>
+            Edit
           </Link>
           <button 
             onClick={() => confirmDeleteLearningPlan(plan.id, plan.title)} 
             className="user-viewlearningplans-btn user-viewlearningplans-btn-delete"
             aria-label="Delete plan"
           >
-            <i className="user-viewlearningplans-icon">🗑️</i>
+            Delete
           </button>
         </div>
       </div>
@@ -280,18 +278,16 @@ export default function Home() {
         </div>
       </div>
       <div className="user-viewlearningplans-list-item-actions">
-        <Link to={`/view-learning-plan/${plan.id}`} className="user-viewlearningplans-btn user-viewlearningplans-btn-view">
-          <i className="user-viewlearningplans-icon">👁️</i>
-        </Link>
+
         <Link to={`/edit-learning-plan/${plan.id}`} className="user-viewlearningplans-btn user-viewlearningplans-btn-edit">
-          <i className="user-viewlearningplans-icon">✏️</i>
+          Edit
         </Link>
         <button 
           onClick={() => confirmDeleteLearningPlan(plan.id, plan.title)} 
           className="user-viewlearningplans-btn user-viewlearningplans-btn-delete"
           aria-label="Delete plan"
         >
-          <i className="user-viewlearningplans-icon">🗑️</i>
+          Delete
         </button>
       </div>
     </div>

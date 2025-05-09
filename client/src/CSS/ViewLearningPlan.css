@@ -789,3 +789,66 @@
   border-radius: var(--border-radius) !important;
   transition: background-color var(--transition-speed) !important;
 }
+
+/* Button Group Styling */
+.user-viewlearningplans-btn-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Base Button Styling */
+.user-viewlearningplans-btn {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Edit Button - Dark Blue */
+.user-viewlearningplans-btn-edit {
+  border: 2px solid #1a365d; /* Dark blue border */
+  color: #1a365d;
+}
+
+.user-viewlearningplans-btn-edit:hover {
+  background-color: #f0f5ff;
+  box-shadow: 0 2px 5px rgba(26, 54, 93, 0.2);
+}
+
+.user-viewlearningplans-btn-edit:active {
+  transform: translateY(1px);
+}
+
+/* Delete Button - Red */
+.user-viewlearningplans-btn-delete {
+  border: 2px solid #e53e3e; /* Red border */
+  color: #e53e3e;
+}
+
+.user-viewlearningplans-btn-delete:hover {
+  background-color: #fff5f5;
+  box-shadow: 0 2px 5px rgba(229, 62, 62, 0.2);
+}
+
+.user-viewlearningplans-btn-delete:active {
+  transform: translateY(1px);
+}
+
+/* Card Actions Container */
+.user-viewlearningplans-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  border-top: 1px solid #edf2f7;
+}
