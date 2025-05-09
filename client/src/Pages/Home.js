@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
-import '../css/HomePage.css';
+import '../css/Homepage.css';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
