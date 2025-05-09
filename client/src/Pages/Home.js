@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
-import '../css/HomePage.css';
+import '../css/Homepage.css';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -334,7 +334,7 @@ export default function Home() {
               <div className="user-home-page-learning-plans-tab">
                 <div className="user-home-page-section-header">
                   <h2>My Learning Plans</h2>
-                  <Link to="/add-learning-plan" className="user-home-page-btn user-home-page-btn-primary">
+                  <Link to="/learning-plan/add" className="user-home-page-btn user-home-page-btn-primary">
                     <span>+</span> New Plan
                   </Link>
                 </div>
@@ -404,7 +404,7 @@ export default function Home() {
                   ) : (
                     <div className="user-home-page-empty-state">
                       <p>No learning plans available yet.</p>
-                      <Link to="/add-learning-plan" className="user-home-page-btn user-home-page-btn-primary">
+                      <Link to="/learning-plan/add" className="user-home-page-btn user-home-page-btn-primary">
                         Create Your First Plan
                       </Link>
                     </div>
