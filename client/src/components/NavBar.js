@@ -12,6 +12,7 @@ const NavBar = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [learningDropdownOpen, setLearningDropdownOpen] = useState(false);
   const [postsDropdownOpen, setPostsDropdownOpen] = useState(false);
+  const [meetingsDropdownOpen, setMeetingsDropdownOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ const NavBar = () => {
     setLearningDropdownOpen(!learningDropdownOpen);
     if (window.innerWidth <= 991.98) {
       setPostsDropdownOpen(false);
+      setMeetingsDropdownOpen(false);
     }
   };
 
@@ -74,6 +76,17 @@ const NavBar = () => {
     setPostsDropdownOpen(!postsDropdownOpen);
     if (window.innerWidth <= 991.98) {
       setLearningDropdownOpen(false);
+      setMeetingsDropdownOpen(false);
+    }
+  };
+
+  const toggleMeetingsDropdown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setMeetingsDropdownOpen(!meetingsDropdownOpen);
+    if (window.innerWidth <= 991.98) {
+      setLearningDropdownOpen(false);
+      setPostsDropdownOpen(false);
     }
   };
 
@@ -87,6 +100,9 @@ const NavBar = () => {
       }
       if (!e.target.closest('.posts-dropdown') && window.innerWidth <= 991.98) {
         setPostsDropdownOpen(false);
+      }
+      if (!e.target.closest('.meetings-dropdown') && window.innerWidth <= 991.98) {
+        setMeetingsDropdownOpen(false);
       }
     };
 
@@ -196,6 +212,34 @@ const NavBar = () => {
                 <li>
                   <Link className="dropdown-item user-navbar-dropdown-item" to="/PostsListrandomuser">
                     View Posts
+                  </Link>
+                </li>
+              </ul>
+            </li>
+
+            <li className="nav-item dropdown user-navbar-dropdown meetings-dropdown">
+              <a 
+                className={`nav-link dropdown-toggle user-navbar-dropdown-toggle ${meetingsDropdownOpen ? 'show' : ''}`}
+                href="#" 
+                id="meetingsDropdown" 
+                role="button"
+                onClick={toggleMeetingsDropdown}
+              >
+                Meetings
+                
+              </a>
+              <ul 
+                className={`dropdown-menu user-navbar-dropdown-menu ${meetingsDropdownOpen ? 'show' : ''}`} 
+                aria-labelledby="meetingsDropdown"
+              >
+                <li>
+                  <Link className="dropdown-item user-navbar-dropdown-item" to="/schedule">
+                    Schedule
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item user-navbar-dropdown-item" to="/sessions">
+                    Join Now
                   </Link>
                 </li>
               </ul>

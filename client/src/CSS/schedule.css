@@ -1,0 +1,395 @@
+/* src/css/schedule.css */
+
+/* ===== General Styles ===== */
+.schedule-page-container,
+.join-page-container,
+.sessions-overview-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.page-description {
+  color: #666;
+  font-size: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.page-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.page-navigation {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* ===== Form Styles ===== */
+.schedule-form-container,
+.join-form-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.schedule-form-container h2,
+.join-form-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.schedule-form,
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.form-row .form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group small {
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox-group input {
+  width: auto;
+}
+
+.checkbox-group label {
+  margin-bottom: 0;
+}
+
+.checkbox-group small {
+  display: block;
+  margin-left: 1.75rem;
+  margin-top: 0.25rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+/* ===== Button Styles ===== */
+.primary-button,
+.secondary-button,
+.join-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  font-size: 1rem;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.primary-button {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+}
+
+.primary-button:hover {
+  background-color: #303f9f;
+}
+
+.secondary-button {
+  background-color: #fff;
+  color: #3f51b5;
+  border: 1px solid #3f51b5;
+}
+
+.secondary-button:hover {
+  background-color: #f5f5f5;
+}
+
+.primary-button:disabled,
+.secondary-button:disabled,
+.join-button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Join Session Specific Styles */
+.join-session-container {
+  margin-bottom: 3rem;
+}
+
+.join-session-container h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+.direct-join-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.direct-join-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.direct-join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.available-sessions-section {
+  margin-top: 2rem;
+}
+
+.available-sessions-section h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.sessions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.session-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-card h4 {
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.session-description {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.session-details {
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+.session-details p {
+  margin-bottom: 0.5rem;
+}
+
+.password-required {
+  color: #ff9800;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.join-button {
+  margin-top: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  width: 100%;
+}
+
+.join-button:hover {
+  background-color: #388e3c;
+}
+
+.join-button.disabled {
+  background-color: #9e9e9e;
+}
+
+.active-session {
+  border: 2px solid #4caf50;
+}
+
+.no-sessions-message {
+  text-align: center;
+  margin: 2rem 0;
+  color: #666;
+}
+
+.create-session-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #3f51b5;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.create-session-link:hover {
+  text-decoration: underline;
+}
+
+/* ===== Jitsi Styles ===== */
+.jitsi-page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.jitsi-header {
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jitsi-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.session-info {
+  font-size: 0.9rem;
+}
+
+.jitsi-container {
+  flex: 1;
+  position: relative;
+  min-height: 600px;
+}
+
+.jitsi-meet-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.jitsi-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+  font-weight: 600;
+  color: #333;
+}
+
+.jitsi-error {
+  padding: 2rem;
+  text-align: center;
+  color: #c62828;
+  font-weight: 600;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 768px) {
+  .sessions-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .form-row .form-group {
+    min-width: 100%;
+  }
+  
+  .schedule-form-container,
+  .join-form-container {
+    padding: 1.5rem;
+  }
+  
+  .jitsi-meet-container {
+    height: 70vh;
+  }
+}
