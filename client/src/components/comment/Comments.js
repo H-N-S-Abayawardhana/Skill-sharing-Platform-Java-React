@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/Comments.css';
+import Swal from 'sweetalert2';
 
 export default function Comments({ postId, userId }) {
     const [comments, setComments] = useState([]);
@@ -140,15 +141,40 @@ export default function Comments({ postId, userId }) {
     };
 
     const handleDeleteComment = async (commentId) => {
-        if (window.confirm("Are you sure you want to delete this comment?")) {
+    // Show confirmation dialog using SweetAlert2
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+        if (result.isConfirmed) {
             try {
                 await axios.delete(`http://localhost:8080/api/comments/${commentId}`);
                 loadComments();
+                
+                // Show success message
+                Swal.fire(
+                    'Deleted!',
+                    'Your comment has been deleted.',
+                    'success'
+                );
             } catch (error) {
                 console.error("Error deleting comment:", error);
+                
+                // Show error message
+                Swal.fire(
+                    'Error!',
+                    'Failed to delete comment.',
+                    'error'
+                );
             }
         }
-    };
+    });
+};
 
     // Formatted timestamp
     const formatDate = (timestamp) => {
