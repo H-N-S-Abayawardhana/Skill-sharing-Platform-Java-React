@@ -15,7 +15,7 @@ export default function PostsList() {
     
     useEffect(() => {
         loadPosts();
-        // Here you would also fetch the current user's ID from your auth system
+        
     }, []);
     
     const loadPosts = async () => {
@@ -61,8 +61,8 @@ export default function PostsList() {
     };
 
     // Get initial letter for avatar placeholder
-    const getInitial = (title) => {
-        return title ? title.charAt(0).toUpperCase() : "P";
+    const getInitial = (username) => {
+        return username ? username.charAt(0).toUpperCase() : "U";
     };
 
     // Format timestamp
@@ -148,10 +148,12 @@ export default function PostsList() {
                             <div key={post.id} className="post-card">
                                 <div className="post-header">
                                     <div className="post-avatar">
-                                        <span>{getInitial(post.title)}</span>
+                                        <span>{getInitial(post.username)}</span>
                                     </div>
                                     <div className="post-author">
-                                        <p className="post-author-name">User {post.userId}</p>
+                                        <p className="post-author-name">
+                                            {post.username || `User ${post.userId}`}
+                                        </p>
                                         <p className="post-timestamp">{formatDate(post.createdAt)}</p>
                                     </div>
                                 </div>

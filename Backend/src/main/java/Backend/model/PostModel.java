@@ -32,6 +32,10 @@ public class PostModel {
     
     @Column(nullable = false)
     private Long userId;
+    
+    // New field for storing username
+    @Column(length = 100)
+    private String username;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -43,22 +47,24 @@ public class PostModel {
     }
 
     // Parameterized constructor
-    public PostModel(String title, String content, Long userId) {
+    public PostModel(String title, String content, Long userId, String username) {
         this.title = title;
         this.content = content;
         this.userId = userId;
+        this.username = username;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
 
     // Full parameterized constructor
-    public PostModel(String title, String content, List<String> tags, List<Long> likes, List<String> mediaUrls, Long userId) {
+    public PostModel(String title, String content, List<String> tags, List<Long> likes, List<String> mediaUrls, Long userId, String username) {
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.likes = likes;
         this.mediaUrls = mediaUrls;
         this.userId = userId;
+        this.username = username;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -118,6 +124,14 @@ public class PostModel {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public LocalDateTime getCreatedAt() {

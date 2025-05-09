@@ -4,6 +4,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import '../../css/EditLearningPlan.css';
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
 
 export default function EditLearningPlan() {
   const { id } = useParams();
@@ -97,7 +98,7 @@ export default function EditLearningPlan() {
     e.preventDefault();
     try {
       await axios.put(`http://localhost:8080/api/learning-plan/${id}`, learningPlan);
-      navigate(`/view-learning-plan/${id}`);
+      navigate(`/view-learning-plans`);
     } catch (error) {
       console.error("Error updating learning plan:", error);
       setError("Failed to update learning plan. Please try again.");
@@ -141,6 +142,8 @@ export default function EditLearningPlan() {
   };
 
   return (
+    <>
+    <NavBar/>
     <div className="Edit-Learning-Plan-container">
       <div className="container">
         <div className="row">
@@ -327,5 +330,7 @@ export default function EditLearningPlan() {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

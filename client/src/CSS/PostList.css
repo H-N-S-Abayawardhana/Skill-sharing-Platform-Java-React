@@ -323,6 +323,8 @@
     overflow: hidden;
 }
 
+
+
 /* Default single image style */
 .post-media.single-photo img {
     width: 100%;
@@ -330,6 +332,7 @@
     object-fit: cover;
     border-radius: 8px;
 }
+
 
 /* Two photos grid */
 .post-media.two-photos {
@@ -345,10 +348,10 @@
 /* Three photos grid - Facebook style */
 .post-media.three-photos {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 200px 99px;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
+    grid-template-rows: 200px; /* 1 row with fixed height */
     grid-gap: 2px;
-    height: 301px;
+    height: 200px; /* Adjusted height */
     max-width: 100%;
 }
 
@@ -359,19 +362,20 @@
     margin: 0;
 }
 
-.post-media.three-photos img:first-child {
-    grid-column: span 2;
+/* Make sure all images fit in the grid */
+.post-media.three-photos img:nth-child(1) {
+    grid-column: 1;
     grid-row: 1;
 }
 
 .post-media.three-photos img:nth-child(2) {
-    grid-column: 1;
-    grid-row: 2;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .post-media.three-photos img:nth-child(3) {
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 1;
 }
 
 /* Four photos grid */
