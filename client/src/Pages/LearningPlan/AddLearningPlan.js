@@ -251,7 +251,7 @@ export default function AddLearningPlan() {
               onClick={addTopic}
               aria-label="Add topic"
             >
-              <i className="fas fa-plus"></i>
+              Add
             </button>
           </div>
           
