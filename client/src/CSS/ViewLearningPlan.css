@@ -756,3 +756,36 @@
 .user-viewlearningplans-stat-card:nth-child(4) {
   animation-delay: 0.3s;
 }
+
+/* SweetAlert custom styles */
+.user-viewlearningplans-swal-popup {
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: 1rem;
+}
+
+.user-viewlearningplans-swal-title {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.user-viewlearningplans-swal-content {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.user-viewlearningplans-swal-content strong {
+  color: var(--primary-color);
+}
+
+.user-viewlearningplans-swal-confirm {
+  font-weight: 500 !important;
+  border-radius: var(--border-radius) !important;
+  transition: background-color var(--transition-speed) !important;
+}
+
+.user-viewlearningplans-swal-cancel {
+  font-weight: 500 !important;
+  border-radius: var(--border-radius) !important;
+  transition: background-color var(--transition-speed) !important;
+}
