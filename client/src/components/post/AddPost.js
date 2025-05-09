@@ -9,6 +9,7 @@ export default function AddPost() {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [tags, setTags] = useState('');
+    const [username, setUsername] = useState('');
     const [files, setFiles] = useState([]);
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
@@ -76,6 +77,11 @@ export default function AddPost() {
             return;
         }
 
+        if (!username.trim()) {
+            setError('Username is required');
+            return;
+        }
+
         const uploadedUrls = files.length > 0 ? await uploadFiles() : [];
 
         if (error) return;
@@ -85,7 +91,8 @@ export default function AddPost() {
             content,
             tags: tags.split(',').map(tag => tag.trim()),
             mediaUrls: uploadedUrls,
-            userId
+            userId,
+            username
         };
 
         try {
@@ -133,78 +140,93 @@ export default function AddPost() {
     };
 
     return (
-        <div className="add-post-container">
-            <div className="add-post-card">
-                <h2 className="add-post-title">Create Post</h2>
+        <>
+            <NavBar />
+            <div className="add-post-container">
+                <div className="add-post-card">
+                    <h2 className="add-post-title">Create Post</h2>
 
-                {error && (
-                    <div className="add-post-error">
-                        {error}
-                    </div>
-                )}
+                    {error && (
+                        <div className="add-post-error">
+                            {error}
+                        </div>
+                    )}
 
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label className="add-post-form-label">Title</label>
-                        <input
-                            type="text"
-                            className="add-post-form-input"
-                            placeholder="Enter post title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            required
-                        />
-                    </div>
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label className="add-post-form-label">Username</label>
+                            <input
+                                type="text"
+                                className="add-post-form-input"
+                                placeholder="Enter your username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                    <div className="mb-3">
-                        <label className="add-post-form-label">Content</label>
-                        <textarea
-                            className="add-post-form-textarea"
-                            placeholder="Enter your post content"
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            rows="5"
-                            required
-                        />
-                    </div>
+                        <div className="mb-3">
+                            <label className="add-post-form-label">Title</label>
+                            <input
+                                type="text"
+                                className="add-post-form-input"
+                                placeholder="Enter post title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                required
+                            />
+                        </div>
 
-                    <div className="mb-3">
-                        <label className="add-post-form-label">Tags (comma separated)</label>
-                        <input
-                            type="text"
-                            className="add-post-form-input"
-                            placeholder="Enter tags"
-                            value={tags}
-                            onChange={(e) => setTags(e.target.value)}
-                        />
-                    </div>
+                        <div className="mb-3">
+                            <label className="add-post-form-label">Content</label>
+                            <textarea
+                                className="add-post-form-textarea"
+                                placeholder="Enter your post content"
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
+                                rows="5"
+                                required
+                            />
+                        </div>
 
-                    <div className="mb-3">
-                        <label className="add-post-form-label">Media (Max 3 files)</label>
-                        <input
-                            type="file"
-                            className="add-post-form-file"
-                            onChange={handleFileChange}
-                            multiple
-                            accept="image/*, video/*"
-                        />
-                        <small>You can upload up to 3 images or videos (Max 10MB each).</small>
-                    </div>
+                        <div className="mb-3">
+                            <label className="add-post-form-label">Tags (comma separated)</label>
+                            <input
+                                type="text"
+                                className="add-post-form-input"
+                                placeholder="Enter tags"
+                                value={tags}
+                                onChange={(e) => setTags(e.target.value)}
+                            />
+                        </div>
 
-                    {renderPreview()}
+                        <div className="mb-3">
+                            <label className="add-post-form-label">Media (Max 3 files)</label>
+                            <input
+                                type="file"
+                                className="add-post-form-file"
+                                onChange={handleFileChange}
+                                multiple
+                                accept="image/*, video/*"
+                            />
+                            <small>You can upload up to 3 images or videos (Max 10MB each).</small>
+                        </div>
 
-                    <div className="add-post-buttons">
-                        <button 
-                            type="submit" 
-                            className="add-post-submit-btn"
-                            disabled={uploading}
-                        >
-                            {uploading ? 'Uploading...' : 'Submit'}
-                        </button>
-                        <Link to="/PostsListrandomuser" className="add-post-cancel-btn">Cancel</Link>
-                    </div>
-                </form>
+                        {renderPreview()}
+
+                        <div className="add-post-buttons">
+                            <button 
+                                type="submit" 
+                                className="add-post-submit-btn"
+                                disabled={uploading}
+                            >
+                                {uploading ? 'Uploading...' : 'Submit'}
+                            </button>
+                            <Link to="/PostsListrandomuser" className="add-post-cancel-btn">Cancel</Link>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
