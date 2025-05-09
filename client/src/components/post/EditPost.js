@@ -31,7 +31,7 @@ export default function EditPost() {
             tags: tags.split(',').map(tag => tag.trim())
         };
         await axios.put(`http://localhost:8080/api/posts/${id}`, updatedPost);
-        navigate('/PostsListrandomuser');
+        navigate('/PostListSystemUser');
     };
 
     return (
@@ -73,7 +73,7 @@ export default function EditPost() {
                     </div>
                     <div className="editpost-buttons">
                         <button type="submit" className="editpost-btn-submit">Update</button>
-                        <Link to="/posts" className="editpost-btn-cancel">Cancel</Link>
+                        <Link to="/PostListSystemUser" className="editpost-btn-cancel">Cancel</Link>
                     </div>
                 </form>
             </div>
