@@ -243,7 +243,7 @@ export default function Comments({ postId, userId }) {
                                         }
                                     >
                                         <i className={`bi ${hasUserLiked(comment.likes) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
-                                        {comment.likes?.length || 0} Like
+                                        {hasUserLiked(comment.likes) ? '👍 Liked' : `${comment.likes?.length || 0} 👍`}
                                     </button>
 
                                     <button
@@ -347,7 +347,7 @@ export default function Comments({ postId, userId }) {
                                                         }
                                                     >
                                                         <i className={`bi ${hasUserLiked(reply.likes) ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-up'}`}></i>
-                                                        {reply.likes?.length || 0} Like
+                                                        {hasUserLiked(reply.likes) ? '👍 Liked' : `${reply.likes?.length || 0} 👍`}
                                                     </button>
 
                                                     {reply.userId === userId && (

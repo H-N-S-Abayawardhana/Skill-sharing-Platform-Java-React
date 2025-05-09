@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { User, LogOut, UserPlus, Menu, X, ChevronDown } from 'lucide-react';
+import NotificationBell from './notification/NotificationBell';
+import { useNotifications } from '../context/NotificationContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/NavBar.css';
 
@@ -98,7 +100,7 @@ const NavBar = () => {
     setIsNavCollapsed(true);
     
     // Fetch user data from localStorage if needed
-    const storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(localStorage.getItem('userData'));
     if (storedUser) {
       setUser(storedUser);
     }
@@ -219,6 +221,9 @@ const NavBar = () => {
               </>
             ) : (
               <div className="user-navbar-user-section">
+                {/* Notification Bell */}
+                <NotificationBell />
+                
                 <div className="user-navbar-profile" onClick={(e) => e.stopPropagation()}>
                   <div className="user-navbar-user">
                     <div className="user-navbar-profile-icon" onClick={toggleProfileDropdown}>
