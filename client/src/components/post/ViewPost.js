@@ -182,5 +182,6 @@ export default function ViewPost() {
                 </div>
             </div>
         </div>
+        
     );
 }

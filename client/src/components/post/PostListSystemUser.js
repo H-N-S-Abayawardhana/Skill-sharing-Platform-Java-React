@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../css/PostList.css';
 import Comments from '../comment/Comments'; 
 import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer'; 
 
 export default function PostsListS() {
     const [posts, setPosts] = useState([]);
@@ -279,6 +280,7 @@ export default function PostsListS() {
                     )}
                 </div>
             </div>
+             <Footer /> 
         </>
     );
 }
