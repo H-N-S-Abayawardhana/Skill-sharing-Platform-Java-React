@@ -42,8 +42,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         
         // Extract user info based on provider
         String email = null;
+        String googleProfilePicture = null;
         if ("google".equals(provider)) {
             email = oAuth2User.getAttribute("email");
+            googleProfilePicture = oAuth2User.getAttribute("picture");
         } else if ("facebook".equals(provider)) {
             email = oAuth2User.getAttribute("email");
         }
@@ -57,6 +59,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         
         User user = userOptional.get();
         
+        // Update Google profile picture if it's a Google login and user doesn't have an uploaded profile picture
+        if ("google".equals(provider) && googleProfilePicture != null && 
+            (user.getProfilePicture() == null || user.getProfilePicture().isEmpty())) {
+            user.setGoogleProfilePicture(googleProfilePicture);
+            userRepository.save(user);
+        }
+        
         // Create user data for frontend
         Map<String, Object> userData = new HashMap<>();
         userData.put("id", user.getId());
@@ -64,8 +73,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         userData.put("email", user.getEmail());
         userData.put("firstName", user.getFirstName());
         userData.put("lastName", user.getLastName());
-        userData.put("profilePicture", user.getProfilePicture());
-        userData.put("bio", user.getBio()); 
+        
+        // Handle profile picture priority - always prefer uploaded profile picture
+        if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+            userData.put("profilePicture", user.getProfilePicture());
+        } else if (user.getGoogleProfilePicture() != null && !user.getGoogleProfilePicture().isEmpty()) {
+            userData.put("profilePicture", user.getGoogleProfilePicture());
+        }
+        
+        userData.put("bio", user.getBio());
         
         // Generate JWT token for the user
         UserDetails userDetails = UserPrincipal.create(user);

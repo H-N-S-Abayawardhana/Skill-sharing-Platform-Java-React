@@ -11,9 +11,17 @@ export const authService = {
         try {
             const response = await axiosInstance.post('/auth/login', { email, password });
             const userData = response.data;
+            
+            // Handle profile picture priority
             if (userData.profilePicture) {
-                userData.profilePicture = getFullImageUrl(userData.profilePicture);
+                // If it's a local profile picture, add the base URL
+                if (!userData.profilePicture.startsWith('http')) {
+                    userData.profilePicture = getFullImageUrl(userData.profilePicture);
+                }
+            } else if (userData.googleProfilePicture) {
+                userData.profilePicture = userData.googleProfilePicture;
             }
+            
             // Store user data without the token
             const { token, ...userDataWithoutToken } = userData;
             localStorage.setItem('user', JSON.stringify(userDataWithoutToken));

@@ -99,4 +99,8 @@ public class UserService {
         user.getFollowing().remove(userToUnfollow);
         userRepository.save(user);
     }
+
+    public java.util.List<User> getSuggestedUsers(Long userId) {
+        return userRepository.findSuggestedUsers(userId);
+    }
 }

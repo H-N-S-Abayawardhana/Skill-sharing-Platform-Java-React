@@ -21,6 +21,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String profilePicture;
+    private String googleProfilePicture;
     private String bio;
 
     @ManyToMany
@@ -98,6 +99,14 @@ public class User {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getGoogleProfilePicture() {
+        return googleProfilePicture;
+    }
+
+    public void setGoogleProfilePicture(String googleProfilePicture) {
+        this.googleProfilePicture = googleProfilePicture;
     }
 
     public String getBio() {

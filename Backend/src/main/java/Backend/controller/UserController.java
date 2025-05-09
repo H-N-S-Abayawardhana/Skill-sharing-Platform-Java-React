@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.Authentication;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -97,5 +98,53 @@ public class UserController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // Follow a user
+    @PostMapping("/{id}/follow")
+    public ResponseEntity<?> followUser(@PathVariable Long id, Authentication authentication) {
+        String email = authentication.getName();
+        User currentUser = userService.getUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        userService.followUser(currentUser.getId(), id);
+        return ResponseEntity.ok().build();
+    }
+
+    // Unfollow a user
+    @PostMapping("/{id}/unfollow")
+    public ResponseEntity<?> unfollowUser(@PathVariable Long id, Authentication authentication) {
+        String email = authentication.getName();
+        User currentUser = userService.getUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        userService.unfollowUser(currentUser.getId(), id);
+        return ResponseEntity.ok().build();
+    }
+
+    // Get suggested users
+    @GetMapping("/suggestions")
+    public ResponseEntity<?> getSuggestedUsers(Authentication authentication) {
+        String email = authentication.getName();
+        User currentUser = userService.getUserByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        java.util.List<User> suggestions = userService.getSuggestedUsers(currentUser.getId());
+        // Map to DTO for frontend (hide sensitive info)
+        java.util.List<java.util.Map<String, Object>> result = new java.util.ArrayList<>();
+        for (User user : suggestions) {
+            java.util.Map<String, Object> map = new java.util.HashMap<>();
+            map.put("id", user.getId());
+            map.put("username", user.getUsername());
+            map.put("firstName", user.getFirstName());
+            map.put("lastName", user.getLastName());
+            map.put("profilePicture", user.getProfilePicture());
+            result.add(map);
+        }
+        return ResponseEntity.ok(result);
     }
 }

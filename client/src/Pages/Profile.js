@@ -4,6 +4,7 @@ import { authService } from '../Services/authService';
 import '../css/Profile.css';
 import Navbar from '../components/NavBar';
 import { FaUserEdit, FaSignOutAlt, FaTrash, FaTh, FaBookmark, FaTag } from 'react-icons/fa';
+import SuggestedUsers from '../components/User/SuggestedUsers';
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -33,8 +34,9 @@ const Profile = () => {
         if (window.confirm('Are you sure you want to delete your profile? This action cannot be undone.')) {
             try {
                 await authService.deleteProfile(user.id);
-                authService.logout();
-                navigate('/Login');
+                localStorage.removeItem('user');
+                localStorage.removeItem('token');
+                navigate('/login', { replace: true });
             } catch (error) {
                 setError(error.message || 'Failed to delete profile');
             }
@@ -42,8 +44,12 @@ const Profile = () => {
     };
 
     const handleLogout = async () => {
-        await authService.logout();
-        navigate('/login');
+        try {
+            await authService.logout();
+            navigate('/login', { replace: true });
+        } catch (error) {
+            setError(error.message || 'Failed to logout');
+        }
     };
 
     if (!user) return (
@@ -68,7 +74,7 @@ const Profile = () => {
                 <div className="Profile-header">
                     <div className="Profile-avatar-container">
                         <img
-                            src={user.profilePicture || '/ProfailIcon.jpg'}
+                            src={user.profilePicture || user.profile_picture || user.googleProfilePicture || '/ProfailIcon.jpg'}
                             alt={user.username}
                             className="Profile-avatar"
                             onError={(e) => {
@@ -153,14 +159,17 @@ const Profile = () => {
                                 <button className="Profile-share-button">Share your first photo</button>
                             </div>
                         ) : (
-                            // This would be populated with actual posts
+                            
                             <div className="Profile-posts-grid">
-                                {/* Post items would go here */}
+                                {}
                             </div>
                         )}
                     </div>
                 </div>
             </div>
+            <div className="profile-right-sidebar">
+    <SuggestedUsers />
+  </div>
         </div>
     );
 };

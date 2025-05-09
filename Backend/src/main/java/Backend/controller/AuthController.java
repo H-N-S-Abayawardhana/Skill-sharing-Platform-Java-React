@@ -140,7 +140,14 @@ public class AuthController {
                 response.put("email", user.getEmail());
                 response.put("firstName", user.getFirstName());
                 response.put("lastName", user.getLastName());
-                response.put("profilePicture", user.getProfilePicture());
+                
+                // Handle profile picture priority
+                if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+                    response.put("profilePicture", user.getProfilePicture());
+                } else if (user.getGoogleProfilePicture() != null && !user.getGoogleProfilePicture().isEmpty()) {
+                    response.put("profilePicture", user.getGoogleProfilePicture());
+                }
+                
                 response.put("bio", user.getBio());
                 
                 return ResponseEntity.ok(response);

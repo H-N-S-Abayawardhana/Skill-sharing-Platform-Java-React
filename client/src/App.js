@@ -16,6 +16,7 @@ import AddPost from './components/post/AddPost';
 import EditPost from './components/post/EditPost';
 import ViewPost from './components/post/ViewPost';
 import PostsListS from './components/post/PostListSystemUser';
+import SuggestedUsers from './components/User/SuggestedUsers';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/oauth2/redirect" element={<OAuth2RedirectHandler />} />
           <Route path="/Profile" element={<Profile/>} />
           <Route path="/update-profile" element={<UpdateProfile />} />
+          <Route path="/SuggestedUsers" element={<SuggestedUsers/>} />
           <Route path="/learning-plan" element={<h1>Learning Plan</h1>} />
           <Route path="/learning-plan/add" element={<AddLearningPlan/>} />
           <Route path="/edit-learning-plan/:id" element={<EditLearningPlan />} />
