@@ -1,4 +1,3 @@
-// Backend/controller/PostController.java
 package Backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import Backend.model.PostModel;
 import Backend.repository.PostRepository;
+import Backend.service.NotificationService;
 import Backend.exception.PostNotFoundException;
 
 import java.util.List;
@@ -17,6 +17,9 @@ import java.util.List;
 public class PostController {
     @Autowired
     private PostRepository postRepository;
+    
+    @Autowired
+    private NotificationService notificationService;
 
     // CREATE - Add a new post
     @PostMapping("/posts")
@@ -75,16 +78,23 @@ public class PostController {
     // LIKE - Add a like to a post
     @PutMapping("/posts/{id}/like/{userId}")
     public PostModel likePost(@PathVariable Long id, @PathVariable Long userId) {
-        return postRepository.findById(id)
-                .map(post -> {
-                    List<Long> likes = post.getLikes();
-                    if (!likes.contains(userId)) {
-                        likes.add(userId);
-                        post.setLikes(likes);
-                    }
-                    return postRepository.save(post);
-                })
+        PostModel post = postRepository.findById(id)
                 .orElseThrow(() -> new PostNotFoundException(id));
+                
+        List<Long> likes = post.getLikes();
+        if (!likes.contains(userId)) {
+            likes.add(userId);
+            post.setLikes(likes);
+            
+            // Create notification for post owner
+            notificationService.createPostLikeNotification(
+                post.getUserId(),
+                userId,
+                id
+            );
+        }
+        
+        return postRepository.save(post);
     }
 
     // UNLIKE - Remove a like from a post
