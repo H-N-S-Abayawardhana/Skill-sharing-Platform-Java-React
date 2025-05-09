@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/ViewPost.css';
+import Comments from '../comment/Comments'; // Import the Comments component
 
 export default function ViewPost() {
     const [post, setPost] = useState({
@@ -12,6 +13,8 @@ export default function ViewPost() {
         mediaUrls: [],
         createdAt: new Date().toISOString() // Adding timestamp
     });
+    const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
+    const [commentCount, setCommentCount] = useState(0); // Track comment count
 
     const { id } = useParams();
 
@@ -21,6 +24,7 @@ export default function ViewPost() {
 
     useEffect(() => {
         loadPost();
+        loadCommentCount(); // Load comment count on component mount
     }, []);
 
     const loadPost = async () => {
@@ -29,6 +33,21 @@ export default function ViewPost() {
             setPost(result.data);
         } catch (error) {
             console.error("Error loading post:", error);
+        }
+    };
+
+    // Fetch comment count for the post
+    const loadCommentCount = async () => {
+        try {
+            const commentsResult = await axios.get(`http://localhost:8080/api/posts/${id}/comments`);
+            const count = Array.isArray(commentsResult.data) ? 
+                        commentsResult.data.length : 
+                        (commentsResult.data && commentsResult.data.content ? 
+                        commentsResult.data.content.length : 0);
+            setCommentCount(count);
+        } catch (error) {
+            console.error("Error fetching comment count:", error);
+            setCommentCount(0);
         }
     };
 
@@ -45,6 +64,11 @@ export default function ViewPost() {
         } catch (error) {
             console.error("Error updating like status:", error);
         }
+    };
+
+    // Toggle comments visibility
+    const toggleComments = () => {
+        setShowComments(!showComments);
     };
 
     const formatDate = (dateString) => {
@@ -148,6 +172,10 @@ export default function ViewPost() {
                         <span className="like-icon">👍</span>
                         <span>{post.likes ? post.likes.length : 0}</span>
                     </div>
+                    <div className="viewpost-comments-count" onClick={toggleComments}>
+                        <span className="comment-icon">💬</span>
+                        <span>{commentCount} Comments</span>
+                    </div>
                 </div>
 
                 {/* Action buttons */}
@@ -160,7 +188,10 @@ export default function ViewPost() {
                         Like
                     </button>
                     
-                    <button className="viewpost-action-btn">
+                    <button 
+                        className="viewpost-action-btn"
+                        onClick={toggleComments}
+                    >
                         <span className="custom-icon comment-icon"></span>
                         Comment
                     </button>
@@ -170,6 +201,18 @@ export default function ViewPost() {
                         Share
                     </button>
                 </div>
+
+                {/* Comments section - shows when toggled */}
+                {showComments && (
+                    <div className="viewpost-comments-section">
+                        <Comments 
+                            postId={id}
+                            userId={userId}
+                            showLikedIndicator={true}
+                            onCommentAdded={loadCommentCount} // Update count when new comment added
+                        />
+                    </div>
+                )}
 
                 {/* Edit and back buttons */}
                 <div className="viewpost-controls">

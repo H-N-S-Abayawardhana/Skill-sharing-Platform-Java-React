@@ -239,7 +239,11 @@
 
 /* User Profile Section */
 .user-navbar-user-section {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* or adjust to your spacing */
   position: relative;
+  z-index: 1;
 }
 
 .user-navbar-profile {
