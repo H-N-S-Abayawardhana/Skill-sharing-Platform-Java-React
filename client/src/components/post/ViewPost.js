@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../../css/ViewPost.css';
-import Comments from '../comment/Comments'; // Import the Comments component
+import Comments from '../comment/Comments'; 
 
 export default function ViewPost() {
     const [post, setPost] = useState({
@@ -11,20 +11,20 @@ export default function ViewPost() {
         tags: [],
         likes: [],
         mediaUrls: [],
-        createdAt: new Date().toISOString() // Adding timestamp
+        createdAt: new Date().toISOString() 
     });
-    const [showComments, setShowComments] = useState(false); // State to toggle comments visibility
-    const [commentCount, setCommentCount] = useState(0); // Track comment count
+    const [showComments, setShowComments] = useState(false); 
+    const [commentCount, setCommentCount] = useState(0); 
 
     const { id } = useParams();
 
-    // For demo purposes, hardcoded userId
+    
     const userId = 1;
-    const username = "John Doe"; // Hardcoded for demo
+    const username = "John Doe"; 
 
     useEffect(() => {
         loadPost();
-        loadCommentCount(); // Load comment count on component mount
+        loadCommentCount(); 
     }, []);
 
     const loadPost = async () => {
@@ -36,7 +36,7 @@ export default function ViewPost() {
         }
     };
 
-    // Fetch comment count for the post
+    
     const loadCommentCount = async () => {
         try {
             const commentsResult = await axios.get(`http://localhost:8080/api/posts/${id}/comments`);
@@ -60,13 +60,13 @@ export default function ViewPost() {
             } else {
                 await axios.put(`http://localhost:8080/api/posts/${id}/like/${userId}`);
             }
-            loadPost();  // Reload post after like/unlike
+            loadPost();  
         } catch (error) {
             console.error("Error updating like status:", error);
         }
     };
 
-    // Toggle comments visibility
+    
     const toggleComments = () => {
         setShowComments(!showComments);
     };
@@ -125,7 +125,7 @@ export default function ViewPost() {
     return (
         <div className="viewpost-container">
             <div className="viewpost-wrapper">
-                {/* Post header with profile info */}
+                
                 <div className="viewpost-header">
                     <div className="viewpost-profile-pic">
                         <span className="person-icon"></span>
@@ -136,14 +136,14 @@ export default function ViewPost() {
                     </div>
                 </div>
 
-                {/* Post title and content */}
+                
                 <h3 className="viewpost-title">{post.title}</h3>
                 
                 <div className="viewpost-content">
                     <p>{post.content}</p>
                 </div>
 
-                {/* Media gallery */}
+               
                 {post.mediaUrls && post.mediaUrls.length > 0 && (
                     <div className={`viewpost-media ${getMediaClass()}`}>
                         {post.mediaUrls.map((url, index) => (
@@ -154,7 +154,7 @@ export default function ViewPost() {
                     </div>
                 )}
 
-                {/* Tags section */}
+            
                 {post.tags && post.tags.length > 0 && (
                     <div className="viewpost-tags">
                         <h5>Tags</h5>
@@ -166,7 +166,7 @@ export default function ViewPost() {
                     </div>
                 )}
 
-                {/* Engagement stats */}
+                
                 <div className="viewpost-stats">
                     <div className="viewpost-likes">
                         <span className="like-icon">👍</span>
@@ -178,7 +178,7 @@ export default function ViewPost() {
                     </div>
                 </div>
 
-                {/* Action buttons */}
+                
                 <div className="viewpost-actions">
                     <button
                         className={`viewpost-action-btn ${isLiked ? 'liked' : ''}`}
@@ -202,19 +202,19 @@ export default function ViewPost() {
                     </button>
                 </div>
 
-                {/* Comments section - shows when toggled */}
+              
                 {showComments && (
                     <div className="viewpost-comments-section">
                         <Comments 
                             postId={id}
                             userId={userId}
                             showLikedIndicator={true}
-                            onCommentAdded={loadCommentCount} // Update count when new comment added
+                            onCommentAdded={loadCommentCount} 
                         />
                     </div>
                 )}
 
-                {/* Edit and back buttons */}
+                
                 <div className="viewpost-controls">
                     <Link to={`/edit-post/${post.id}`} className="viewpost-control-btn viewpost-edit-btn">
                         Edit

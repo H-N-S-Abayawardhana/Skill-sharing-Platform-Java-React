@@ -9,7 +9,7 @@ import Footer from '../../components/Footer';
 export default function PostsListS() {
     const [posts, setPosts] = useState([]);
     const [activeCommentPostId, setActiveCommentPostId] = useState(null);
-    const [currentUserId, setCurrentUserId] = useState(1); // This should come from your auth context
+    const [currentUserId, setCurrentUserId] = useState(1);
     const [commentCounts, setCommentCounts] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -26,14 +26,14 @@ export default function PostsListS() {
             const result = await axios.get('http://localhost:8080/api/posts');
             console.log("Posts fetched:", result.data);
             
-            // Make sure posts is always an array
+            
             const postsData = Array.isArray(result.data) ? result.data : 
                              (result.data && result.data.content ? result.data.content : []);
             
             console.log("Processed posts data:", postsData);
             setPosts(postsData);
             
-            // Fetch comment counts for each post
+            
             const counts = {};
             for (const post of postsData) {
                 try {
@@ -56,31 +56,34 @@ export default function PostsListS() {
         }
     };
     
-    const deletePost = async (id) => {
+  const deletePost = async (id) => {
+    const confirmed = window.confirm("Are you sure you want to delete this post?");
+    if (confirmed) {
         try {
             await axios.delete(`http://localhost:8080/api/posts/${id}`);
-            loadPosts();
+            loadPosts(); 
         } catch (error) {
             console.error("Error deleting post:", error);
             alert("Failed to delete post");
         }
-    };
+    }
+};
 
-    // Toggle comments visibility for a post
+    
     const toggleComments = (postId) => {
         if (activeCommentPostId === postId) {
-            setActiveCommentPostId(null); // Close comments if already open
+            setActiveCommentPostId(null); 
         } else {
-            setActiveCommentPostId(postId); // Open comments for this post
+            setActiveCommentPostId(postId); 
         }
     };
 
-    // Get initial letter for avatar placeholder
+    
     const getInitial = (title) => {
         return title ? title.charAt(0).toUpperCase() : "P";
     };
 
-    // Format timestamp
+    
     const formatDate = (timestamp) => {
         if (!timestamp) return "Just now";
         const date = new Date(timestamp);
@@ -91,10 +94,10 @@ export default function PostsListS() {
         });
     };
 
-    // Handle like/unlike post
+    
     const handleLikePost = async (postId) => {
         try {
-            // Check if user already liked the post
+           
             const post = posts.find(p => p.id === postId);
             if (post && post.likes && post.likes.includes(currentUserId)) {
                 // Unlike
@@ -110,12 +113,12 @@ export default function PostsListS() {
         }
     };
 
-    // Check if the current user has liked a post
+    
     const hasUserLikedPost = (post) => {
         return post.likes && post.likes.includes(currentUserId);
     };
 
-    // Function to determine media grid class based on number of photos
+    
     const getMediaGridClass = (mediaUrls) => {
         if (!mediaUrls || mediaUrls.length === 0) return '';
         
@@ -178,11 +181,11 @@ export default function PostsListS() {
                                         : post.content}
                                     </p>
                                     
-                                    {/* Display media with Facebook-style grid */}
+                                    
                                     {post.mediaUrls && post.mediaUrls.length > 0 && (
                                         <div className={`post-media ${getMediaGridClass(post.mediaUrls)}`}>
                                             {post.mediaUrls.length === 3 ? (
-                                                // Special handling for exactly 3 photos
+                                                
                                                 <>
                                                     {post.mediaUrls.map((url, index) => (
                                                         <img 
@@ -194,7 +197,7 @@ export default function PostsListS() {
                                                     ))}
                                                 </>
                                             ) : (
-                                                // Default handling for 1, 2, 4 or more photos
+                                                
                                                 post.mediaUrls.slice(0, 4).map((url, index) => (
                                                     <div key={index} className={post.mediaUrls.length > 4 && index === 3 ? "photo-counter-container" : ""}>
                                                         <img 
@@ -248,7 +251,7 @@ export default function PostsListS() {
                                     </button>
                                 </div> */}
                                 
-                                {/* Comments section */}
+                                
                                 {activeCommentPostId === post.id && (
                                     <div className="post-comments-section">
                                         <Comments 
@@ -259,7 +262,7 @@ export default function PostsListS() {
                                     </div>
                                 )}
                                 
-                                {/* Action buttons */}
+                                
                                 <div className="post-buttons">
                                     <Link to={`/view-post/${post.id}`} className="post-btn post-btn-view">
                                         <i className="bi bi-eye"></i> View

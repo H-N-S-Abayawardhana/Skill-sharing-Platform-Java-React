@@ -1,4 +1,4 @@
-/* Facebook-style Posts UI with Action Buttons */
+
 .postlist-container {
     background-color: #d6d8dd;
     padding: 1.5rem;
@@ -57,7 +57,7 @@
     margin: 0 auto;
 }
 
-/* Empty state */
+/* Empty  */
 .postlist-empty {
     background-color: white;
     color: #65676b;
@@ -84,7 +84,7 @@
     overflow: hidden;
 }
 
-/* Post header with author info */
+/* Post header  */
 .post-header {
     display: flex;
     align-items: center;
@@ -308,11 +308,11 @@
 
 .post-media img {
     width: 100%;
-    max-width: 600px;  /* Customize as needed */
+    max-width: 600px;  
     height: auto;
-    max-height: 400px;  /* Optional for setting a max height */
-    border-radius: 8px; /* Rounded corners */
-    object-fit: cover;  /* Ensure the image fits well without stretching */
+    max-height: 400px;  
+    border-radius: 8px; 
+    object-fit: cover;  
 }
 
 .post-media {
@@ -345,13 +345,13 @@
     object-fit: cover;
 }
 
-/* Three photos grid - Facebook style */
+/* Three photos grid  */
 .post-media.three-photos {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* 3 equal columns */
-    grid-template-rows: 200px; /* 1 row with fixed height */
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 200px; 
     grid-gap: 2px;
-    height: 200px; /* Adjusted height */
+    height: 200px; 
     max-width: 100%;
 }
 
@@ -362,7 +362,7 @@
     margin: 0;
 }
 
-/* Make sure all images fit in the grid */
+
 .post-media.three-photos img:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -391,7 +391,7 @@
     object-fit: cover;
 }
 
-/* Five or more photos grid */
+
 .post-media.many-photos {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 150px);
@@ -404,12 +404,12 @@
     object-fit: cover;
 }
 
-/* Show only the first 4 images */
+
 .post-media.many-photos img:nth-child(n+5) {
     display: none;
 }
 
-/* Special container for the 4th image when there are 5+ photos */
+
 .post-media.many-photos .photo-counter-container {
     position: relative;
 }
@@ -429,13 +429,13 @@
     font-weight: bold;
 }
 
-/* All images hover effect */
+
 .post-media img:hover {
     opacity: 0.95;
     cursor: pointer;
 }
 
-/* Media loading state */
+
 .post-media-loading {
     height: 200px;
     background-color: #f0f2f5;
