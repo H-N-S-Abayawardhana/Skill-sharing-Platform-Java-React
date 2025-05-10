@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
 import '../css/Register.css';
-import Navbar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserEdit, FaGoogle, FaFacebook } from "react-icons/fa";
 import { motion } from "framer-motion"; // Added for animations
 
@@ -197,7 +197,7 @@ const Register = () => {
 
     return (
         <div className="Register-register-page">
-            <Navbar/>
+            <NavBar/>
             <motion.div 
                 className="Register-register-container"
                 initial={{ opacity: 0 }}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
 import '../css/UpdateProfile.css';
-import Navbar from '../components/NavBar'
+import NavBar from '../components/NavBar';
 
 const UpdateProfile = () => {
     const [formData, setFormData] = useState({
@@ -85,7 +85,7 @@ const UpdateProfile = () => {
 
     return (
         <div className="UpdateProfile-div">
-            <Navbar/>
+            <NavBar/>
        
         <div className="UpdateProfile-update-profile-container">
             <h2>Update Profile</h2>

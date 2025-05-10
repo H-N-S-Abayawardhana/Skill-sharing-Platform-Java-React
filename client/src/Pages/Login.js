@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
 import '../css/Login.css';
-import Navbar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaFacebook } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -55,7 +55,7 @@ const Login = () => {
 
     return (
         <div className="Login-login-page">
-            <Navbar/>
+            <NavBar/>
             <motion.div 
                 className="Login-login-container"
                 initial={{ opacity: 0 }}

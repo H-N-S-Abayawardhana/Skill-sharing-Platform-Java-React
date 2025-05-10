@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../Services/authService';
 import '../css/Profile.css';
-import Navbar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 import { FaUserEdit, FaSignOutAlt, FaTrash, FaTh, FaBookmark, FaTag } from 'react-icons/fa';
 import SuggestedUsers from '../components/User/SuggestedUsers';
 
@@ -66,7 +66,7 @@ const Profile = () => {
 
     return (
         <div className="Profile-page">
-            <Navbar />
+            <NavBar />
             
             <div className="Profile-container">
                 {error && <div className="Profile-error-message">{error}</div>}
