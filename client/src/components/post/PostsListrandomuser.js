@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../css/PostList.css';
 import Comments from '../comment/Comments'; 
 import NavBar from '../../components/NavBar';
-import Footer from '../../components/Footer'; // Import Footer component
+import Footer from '../../components/Footer'; 
 
 export default function PostsList() {
     const [posts, setPosts] = useState([]);
@@ -155,7 +155,7 @@ export default function PostsList() {
                                         : post.content}
                                     </p>
                                   
-                                    {/* Display media with Facebook-style grid */}
+                                    
                                     {post.mediaUrls && post.mediaUrls.length > 0 && (
                                         <div className={`post-media ${getMediaGridClass(post.mediaUrls)}`}>
                                             {post.mediaUrls.length === 3 ? (
@@ -222,7 +222,7 @@ export default function PostsList() {
                                     </button>
                                 </div>
                                 
-                                {/* Comments section */}
+                                
                                 {activeCommentPostId === post.id && (
                                     <div className="post-comments-section">
                                         <Comments 
@@ -238,7 +238,7 @@ export default function PostsList() {
                 </div>
             </div>
             
-            <Footer />  {/* Add Footer here */}
+            <Footer /> 
         </>
     );
 }

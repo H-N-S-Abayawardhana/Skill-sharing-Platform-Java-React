@@ -82,7 +82,7 @@ export default function EditPost() {
                 </form>
             </div>
         </div>
-         <Footer />  {/* Add Footer here */}
+         <Footer />  
         </>
     );
 }

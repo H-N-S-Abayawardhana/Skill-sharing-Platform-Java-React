@@ -17,9 +17,9 @@ export default function AddPost() {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
-    const userId = 1; // Hardcoded for demo
+    const userId = 1; 
 
-    // Handle file change and ensure only up to 3 files and valid file types are selected
+    
     const handleFileChange = (e) => {
         const selectedFiles = Array.from(e.target.files);
         
@@ -28,7 +28,7 @@ export default function AddPost() {
             return;
         }
 
-        // Validate file types and sizes
+        
         const validTypes = ['image/jpeg', 'image/png', 'video/mp4'];
         for (let file of selectedFiles) {
             if (!validTypes.includes(file.type)) {
@@ -45,7 +45,7 @@ export default function AddPost() {
         setError('');
     };
 
-    // Upload files to the server
+    
     const uploadFiles = async () => {
         if (files.length === 0) return [];
 
@@ -70,7 +70,7 @@ export default function AddPost() {
         }
     };
 
-    // Handle form submission to create a post
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 

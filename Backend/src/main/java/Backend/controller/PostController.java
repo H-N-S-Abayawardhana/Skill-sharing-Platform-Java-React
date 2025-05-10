@@ -86,7 +86,7 @@ public class PostController {
             likes.add(userId);
             post.setLikes(likes);
             
-            // Create notification for post owner
+            
             notificationService.createPostLikeNotification(
                 post.getUserId(),
                 userId,
