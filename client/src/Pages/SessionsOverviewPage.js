@@ -17,14 +17,14 @@ const SessionsOverviewPage = () => {
   const [highlightedSessionId, setHighlightedSessionId] = useState(null);
 
   useEffect(() => {
-    // Load all sessions
+    
     loadSessions();
     
-    // Check if redirected from creating a new session
+    
     if (location.state && location.state.newSessionCreated) {
       setHighlightedSessionId(location.state.sessionId);
       
-      // Clear the highlighted session after a delay
+      
       setTimeout(() => {
         setHighlightedSessionId(null);
       }, 3000);
@@ -36,7 +36,7 @@ const SessionsOverviewPage = () => {
     try {
       const allSessions = getAllSessions();
       
-      // Sort sessions by scheduled time (soonest first)
+      
       const sortedSessions = allSessions.sort((a, b) => {
         const timeA = new Date(a.scheduledTime).getTime();
         const timeB = new Date(b.scheduledTime).getTime();
@@ -54,7 +54,7 @@ const SessionsOverviewPage = () => {
 
   const handleJoinSession = (sessionId, password = null) => {
     try {
-      // Attempt to join the session
+      
       const session = joinSession(sessionId, password);
       
       

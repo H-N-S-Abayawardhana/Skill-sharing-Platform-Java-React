@@ -112,10 +112,10 @@ export const updateSession = (sessionId, updates) => {
       // Replace the old session with the updated one
       sessions[sessionIndex] = updatedSession;
       
-      // Save back to localStorage
+      
       localStorage.setItem('skillSessions', JSON.stringify(sessions));
       
-      // Return the updated session
+      
       resolve(updatedSession);
     } catch (error) {
       console.error('Error updating session:', error);
