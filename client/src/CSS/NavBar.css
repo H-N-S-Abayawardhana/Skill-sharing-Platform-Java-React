@@ -262,7 +262,7 @@
 
 .user-navbar-profile-icon {
   width: 44px; /* Increased size */
-  height: 44px; /* Increased size */
+  height: 44px; 
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
   display: flex;
