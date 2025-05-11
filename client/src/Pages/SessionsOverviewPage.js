@@ -57,7 +57,7 @@ const SessionsOverviewPage = () => {
       // Attempt to join the session
       const session = joinSession(sessionId, password);
       
-      // If successful, navigate to the join page
+      
       navigate(`/join/${sessionId}`, { 
         state: { sessionDetails: session } 
       });
@@ -75,13 +75,13 @@ const SessionsOverviewPage = () => {
       return;
     }
     
-    // Check if the code exists as a session ID
+    
     const sessionExists = sessions.some(s => s.id === directJoinCode);
     
     if (sessionExists) {
       handleJoinSession(directJoinCode);
     } else {
-      // If not found in existing sessions, use it as a direct room name
+      
       navigate(`/join/${directJoinCode}`);
     }
   };
@@ -97,7 +97,7 @@ const SessionsOverviewPage = () => {
     }
   };
 
-  // Calculate if a session is happening now (within +/- 15 minutes of scheduled time)
+  
   const isSessionNow = (scheduledTime) => {
     if (!scheduledTime) return false;
     
