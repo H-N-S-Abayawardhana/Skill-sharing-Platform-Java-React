@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import jitsiService from '../Services/jitsiService';
 import '../css/jitsi.css';
