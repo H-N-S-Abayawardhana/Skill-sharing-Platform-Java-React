@@ -17,7 +17,7 @@ const NavBar = () => {
   const [isNavCollapsed, setIsNavCollapsed] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
-  const isAuthenticated = localStorage.getItem('token'); // Check if user is authenticated
+  const isAuthenticated = localStorage.getItem('token'); 
 
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -111,11 +111,11 @@ const NavBar = () => {
   }, []);
 
   useEffect(() => {
-    // Close mobile menu on route change
+    
     setIsMobileMenuOpen(false);
     setIsNavCollapsed(true);
     
-    // Fetch user data from localStorage if needed
+    
     const storedUser = JSON.parse(localStorage.getItem('userData'));
     if (storedUser) {
       setUser(storedUser);
