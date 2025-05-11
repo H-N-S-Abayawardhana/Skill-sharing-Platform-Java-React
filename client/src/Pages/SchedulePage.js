@@ -23,14 +23,14 @@ const SchedulePage = () => {
   const [success, setSuccess] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Load saved host name if available
+  
   useEffect(() => {
     const savedName = localStorage.getItem('userDisplayName');
     if (savedName) {
       setFormData(prev => ({ ...prev, hostName: savedName }));
     }
     
-    // Set default scheduled time to 15 minutes from now
+     
     const defaultTime = new Date();
     defaultTime.setMinutes(defaultTime.getMinutes() + 15);
     setFormData(prev => ({ 
@@ -39,13 +39,13 @@ const SchedulePage = () => {
     }));
   }, []);
 
-  // Helper function to format date for datetime-local input
+  
   const formatDateTimeForInput = (date) => {
     const pad = (num) => num.toString().padStart(2, '0');
     return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
   };
 
-  // Handle form input changes
+  
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -53,12 +53,12 @@ const SchedulePage = () => {
       [name]: type === 'checkbox' ? checked : value
     });
     
-    // Clear previous errors/success messages
+    
     setError(null);
     setSuccess(null);
   };
 
-  // Handle form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);

@@ -17,14 +17,14 @@ const SessionsOverviewPage = () => {
   const [highlightedSessionId, setHighlightedSessionId] = useState(null);
 
   useEffect(() => {
-    // Load all sessions
+    
     loadSessions();
     
-    // Check if redirected from creating a new session
+    
     if (location.state && location.state.newSessionCreated) {
       setHighlightedSessionId(location.state.sessionId);
       
-      // Clear the highlighted session after a delay
+      
       setTimeout(() => {
         setHighlightedSessionId(null);
       }, 3000);
@@ -36,7 +36,7 @@ const SessionsOverviewPage = () => {
     try {
       const allSessions = getAllSessions();
       
-      // Sort sessions by scheduled time (soonest first)
+      
       const sortedSessions = allSessions.sort((a, b) => {
         const timeA = new Date(a.scheduledTime).getTime();
         const timeB = new Date(b.scheduledTime).getTime();
@@ -54,10 +54,10 @@ const SessionsOverviewPage = () => {
 
   const handleJoinSession = (sessionId, password = null) => {
     try {
-      // Attempt to join the session
+      
       const session = joinSession(sessionId, password);
       
-      // If successful, navigate to the join page
+      
       navigate(`/join/${sessionId}`, { 
         state: { sessionDetails: session } 
       });
@@ -75,13 +75,13 @@ const SessionsOverviewPage = () => {
       return;
     }
     
-    // Check if the code exists as a session ID
+    
     const sessionExists = sessions.some(s => s.id === directJoinCode);
     
     if (sessionExists) {
       handleJoinSession(directJoinCode);
     } else {
-      // If not found in existing sessions, use it as a direct room name
+      
       navigate(`/join/${directJoinCode}`);
     }
   };
@@ -97,7 +97,7 @@ const SessionsOverviewPage = () => {
     }
   };
 
-  // Calculate if a session is happening now (within +/- 15 minutes of scheduled time)
+  
   const isSessionNow = (scheduledTime) => {
     if (!scheduledTime) return false;
     

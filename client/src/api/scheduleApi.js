@@ -1,6 +1,3 @@
-// src/api/scheduleApi.js
-// This is a simple mock API service that uses localStorage
-// It can be replaced with actual API calls to your backend when available
 
 /**
  * Fetches all sessions
@@ -62,21 +59,21 @@ export const getSessionByRoomName = (roomName) => {
 export const createSession = (sessionData) => {
   return new Promise((resolve) => {
     try {
-      // Add ID and timestamps
+      
       const newSession = {
         id: Date.now().toString(),
         createdAt: new Date().toISOString(),
         ...sessionData,
       };
 
-      // Get existing sessions and add the new one
+      
       const sessions = JSON.parse(localStorage.getItem('skillSessions') || '[]');
       const updatedSessions = [...sessions, newSession];
       
-      // Save back to localStorage
+      
       localStorage.setItem('skillSessions', JSON.stringify(updatedSessions));
       
-      // Return the created session
+      
       resolve(newSession);
     } catch (error) {
       console.error('Error creating session:', error);
@@ -102,20 +99,20 @@ export const updateSession = (sessionId, updates) => {
         return;
       }
       
-      // Update the session
+      
       const updatedSession = {
         ...sessions[sessionIndex],
         ...updates,
         updatedAt: new Date().toISOString(),
       };
       
-      // Replace the old session with the updated one
+      
       sessions[sessionIndex] = updatedSession;
       
-      // Save back to localStorage
+      
       localStorage.setItem('skillSessions', JSON.stringify(sessions));
       
-      // Return the updated session
+      
       resolve(updatedSession);
     } catch (error) {
       console.error('Error updating session:', error);
